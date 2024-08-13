@@ -1,19 +1,58 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { ActionResult, handleSignIn } from "./action";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FormEvent, useState } from "react";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const initialFormState: ActionResult = {
   errorTitle: null,
   errorMessage: [],
+  success: false,
+  successMessage: null,
 };
 
 const FormSignIn = () => {
   const [state, formAction] = useFormState(handleSignIn, initialFormState);
+  const router = useRouter();
+  // console.log(state)
+
+  useEffect(() => {
+    if (state.success === true) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: state.successMessage || "Sign in successfully!",
+        text: "Redirecting to dashboard...",
+      });
+
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 2000);
+    } else if (state.errorTitle && state.errorMessage) {
+      Swal.fire({
+        title: state.errorTitle,
+        text: state.errorMessage.join("\n"),
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  }, [state]);
 
   return (
     <div className="w-full h-screen bg-[#f5f5f5]">
@@ -47,14 +86,29 @@ const FormSignIn = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full mt-6">
+              {/* <Button type="submit" className="w-full mt-6">
                 Sign In
-              </Button>
+              </Button> */}
+              <SubmitButton />
             </form>
           </div>
         </div>
       </div>
     </div>
+  );
+};
+
+export const SubmitButton = () => {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" className="w-full mt-6">
+      {pending ? (
+        <span className="loading loading-spinner loading-xs"></span>
+      ) : (
+        "Sign In"
+      )}
+    </Button>
   );
 };
 
