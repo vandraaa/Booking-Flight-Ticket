@@ -1,19 +1,20 @@
 "use server"
 
-import { redirect } from "next/navigation"
 import { formSchema } from "./validation"
-import prisma from "../../../../../lib/prisma"
 import { lucia } from "@/lib/auth";
 import { cookies } from "next/headers";
+import prisma from "../../../../../../lib/prisma";
 const bcrypt = require('bcrypt');
 
 export interface ActionResult {
     errorTitle: string | null
     errorMessage: string[] | null
+    success: boolean
+    successMessage: string | null
 }
 
 export async function handleSignIn(prevState: any, formData: FormData): Promise<ActionResult> {
-    console.log(formData.get("email"), formData.get("password"))
+    // console.log(formData.get("email"), formData.get("password"))
 
     const values = formSchema.safeParse({
         email: formData.get("email"),
@@ -23,7 +24,7 @@ export async function handleSignIn(prevState: any, formData: FormData): Promise<
     if(!values.success) {
         const errorMessage = values.error.issues.map((issue) => issue.message)
 
-        return { errorTitle: 'Error Validation', errorMessage: errorMessage || null }
+        return { errorTitle: 'Error Validation', errorMessage: errorMessage || null, success: false, successMessage: null }
     } 
 
     const existingUser = await prisma.user.findUnique({
@@ -33,13 +34,13 @@ export async function handleSignIn(prevState: any, formData: FormData): Promise<
     })
 
     if (!existingUser) {
-        return { errorTitle: 'Error Validation', errorMessage: ['Email not found'] || null }
+        return { errorTitle: 'Error Validation', errorMessage: ['Email not found'] || null, success: false, successMessage: null }
     }
 
     const validPassword = await bcrypt.compare(values.data.password, existingUser.password)
 
     if(!validPassword) {
-        return { errorTitle: 'Error Validation', errorMessage: ['Password not match'] || null }
+        return { errorTitle: 'Error Validation', errorMessage: ['Password not match'] || null, success: false, successMessage: null }
     }
 
     const session = await lucia.createSession(existingUser.id, {})
@@ -51,5 +52,5 @@ export async function handleSignIn(prevState: any, formData: FormData): Promise<
         sessionCookie.attributes
     )
 
-    return redirect('/dashboard')
+    return { errorTitle: null, errorMessage: null, success: true, successMessage: "Sign in successfully!" }
 }
