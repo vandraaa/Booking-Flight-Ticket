@@ -27,23 +27,23 @@ const FormSignIn = () => {
         toast: true,
         position: "top-end",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1500,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
           toast.onmouseleave = Swal.resumeTimer;
-        },
+        }
       });
-
       Toast.fire({
         icon: "success",
-        title: state.successMessage || "Sign in successfully!",
-        text: "Redirecting to dashboard...",
-      });
-
-      setTimeout(() => {
+        title: state.successMessage || "Sign In Successfully!",
+        html: "<p class='text-xs leading-3'>Redirecting...</p>",
+        customClass: {
+          title: "text-sm font-medium leading-3",
+        }
+      }).then(() => {
         router.push("/dashboard");
-      }, 2000);
+      })
     } else if (state.errorTitle && state.errorMessage) {
       Swal.fire({
         title: state.errorTitle,
