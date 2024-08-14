@@ -1,9 +1,12 @@
+// "use client";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../../globals.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Plane, PlaneTakeoff } from "lucide-react";
+import { Plane, PlaneTakeoff, Ticket, User } from "lucide-react";
+import ButtonLogout from "./components/ButtonLogout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,30 +28,73 @@ export default function DashboardLayout({
               <span className="font-bold text-white">Andra Airlines</span>
             </div>
           </nav>
+
           <section className="flex flex-row gap-5 items-start flex-nowrap">
             <section className="grow-0 w-[20%] h-screen shadow p-5 space-y-5 bg-white">
               <div className="space-y-2">
-                <Button variant={"ghost"} asChild className="w-full justify-start">
+                <Button
+                  variant={"ghost"}
+                  asChild
+                  className="w-full justify-start"
+                >
                   <Link href={"/dashboard"}>Dashboard</Link>
                 </Button>
               </div>
               <div className="space-y-2">
                 <div className="font-bold uppercase text-xs">Master Data</div>
-                <Button variant={"ghost"} asChild className="w-full justify-start">
-                  <Link href={"/dashboard"}>
+                <Button
+                  variant={"ghost"}
+                  asChild
+                  className="w-full justify-start"
+                >
+                  <Link href={"/dashboard/airplanes"}>
                     <Plane className="mr-2 size-4" />
                     Airplanes
                   </Link>
                 </Button>
-                <Button variant={"ghost"} asChild className="w-full justify-start">
-                  <Link href={"/dashboard"}>
+
+                <Button
+                  variant={"ghost"}
+                  asChild
+                  className="w-full justify-start"
+                >
+                  <Link href={"/dashboard/flights"}>
                     <PlaneTakeoff className="mr-2 size-4" />
                     Flights
                   </Link>
                 </Button>
+
+                <Button
+                  variant={"ghost"}
+                  asChild
+                  className="w-full justify-start"
+                >
+                  <Link href={"/dashboard/tickets"}>
+                    <Ticket className="mr-2 size-4" />
+                    Tickets
+                  </Link>
+                </Button>
+
+                <Button
+                  variant={"ghost"}
+                  asChild
+                  className="w-full justify-start"
+                >
+                  <Link href={"/dashboard/users"}>
+                    <User className="mr-2 size-4" />
+                    Users
+                  </Link>
+                </Button>
+                
+                <ButtonLogout />
               </div>
             </section>
+
+            <section className="grow mr-5 mt-5 overflow-y-auto">
+              {children}
+            </section>
           </section>
+
         </section>
       </body>
     </html>
