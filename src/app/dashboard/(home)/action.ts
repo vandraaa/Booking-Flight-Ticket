@@ -24,5 +24,9 @@ export async function handleLogout(): Promise<ActionResult> {
         sessionCookie.attributes
     );
 
-    return redirect('/dashboard/signin')
+    // return redirect('/dashboard/signin')
+    return {
+        success: true,
+        successMessage: 'Logout success'
+    } as ActionResult
 }
