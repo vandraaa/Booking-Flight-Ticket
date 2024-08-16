@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plane, PlaneTakeoff, Ticket, User } from "lucide-react";
 import ButtonLogout from "./components/ButtonLogout";
+import { getUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +16,18 @@ export const metadata: Metadata = {
   title: "Andra Airlines",
 };
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const {session, user} = await getUser();
+
+  if(session === null || user.role === 'CUSTOMER') {
+    redirect('/dashboard/signin')
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>
