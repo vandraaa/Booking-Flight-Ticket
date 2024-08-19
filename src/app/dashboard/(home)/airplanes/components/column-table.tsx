@@ -6,6 +6,7 @@ import { Airplane } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import { Pencil } from "lucide-react";
 import Link from "next/link";
+import DeleteAirplane from "./delete-airplane";
 
 export const columsAirplanes: ColumnDef<Airplane>[] = [
     {
@@ -32,6 +33,7 @@ export const columsAirplanes: ColumnDef<Airplane>[] = [
     },
     {
         id: 'actions',
+        header: 'Actions',
         cell: ({row}: any) => {
             const airplane = row.original;
             return (
@@ -42,6 +44,7 @@ export const columsAirplanes: ColumnDef<Airplane>[] = [
                             Edit
                         </Link>
                     </Button>
+                    <DeleteAirplane id={airplane.id} />
                 </div>
             )
         }

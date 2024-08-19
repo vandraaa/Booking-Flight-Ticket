@@ -15,19 +15,38 @@ export const uploadFile = async (file: File) => {
         upsert: false,
       });
 
-      if(error) {
-        throw new Error(error.message);
-      }
+    if (error) {
+      throw new Error(error.message);
+    }
 
-      return filename;
+    return filename;
+  } catch (err) {
+    console.log(err);
+
+    return err;
+  }
+};
+
+export const getUrlFile = (filename: string) => {
+  const { data } = supabase.storage
+    .from("ImageUpload")
+    .getPublicUrl(`public/airplanes/${filename}`);
+  return data.publicUrl;
+};
+
+export const deleteFile = async (filename: string) => {
+  try {
+    const { data, error } = await supabase.storage
+      .from("ImageUpload")
+      .remove([`public/airplanes/${filename}`]);
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
   } catch (err) {
     console.log(err);
 
     return err
   }
 };
-
-export const getUrlFile = (filename: string) => {
-  const {data} = supabase.storage.from("ImageUpload").getPublicUrl(`public/airplanes/${filename}`);
-  return data.publicUrl
-}

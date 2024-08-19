@@ -6,8 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { useFormState, useFormStatus } from "react-dom";
 import { saveAirplane, updateAirplane } from "../lib/actions";
-import Swal from "sweetalert2";
-import { useEffect } from "react";
 import type { Airplane } from "@prisma/client";
 
 interface FormAirplaneProps {
@@ -26,8 +24,12 @@ const SubmitButton = () => {
   const { pending } = useFormStatus();
 
   return (
-    <Button disabled={pending} className="font-bold w-full" size={"sm"}>
-      Submit
+    <Button className="font-bold w-full" size={"sm"}>
+      {pending ? (
+        <span className="loading loading-spinner loading-xs"></span>
+      ) : (
+        "Submit"
+      )}
     </Button>
   );
 };
@@ -43,39 +45,35 @@ export default function FormAirplane({
     initialFormState
   );
 
-  useEffect(() => {
-    if (state.success === true) {
-      Swal.fire({
-        title: "Success",
-        text: state.successMessage || "Airplane saved successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-    } else if (state.errorTitle && state.errorMessage) {
-      Swal.fire({
-        title: state.errorTitle,
-        text: state.errorMessage.join("\n"),
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-    }
-  });
-
   return (
     <>
-      <form action={formAction} className="w-[40%]">
-        <div className="space-y-2 p-2">
-          <Label htmlFor="code" className="font-semibold">
-            Airplane Code
-          </Label>
-          <Input
-            required
-            type="text"
-            name="code"
-            defaultValue={defaultValues?.code}
-            placeholder="Input airplane code..."
-          />
+      <form action={formAction}>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2 p-2">
+            <Label htmlFor="code" className="font-semibold">
+              Airplane Code
+            </Label>
+            <Input
+              required
+              type="text"
+              name="code"
+              defaultValue={defaultValues?.code}
+              placeholder="Input airplane code..."
+            />
+          </div>
+          <div className="space-y-2 p-2">
+            <Label htmlFor="name" className="font-semibold">
+              Image
+            </Label>
+            <Input
+              required
+              type="file"
+              name="image"
+              placeholder="Upload image..."
+            />
+          </div>
         </div>
+
         <div className="space-y-2 p-2">
           <Label htmlFor="name" className="font-semibold">
             Name
@@ -88,18 +86,8 @@ export default function FormAirplane({
             placeholder="Input airplane name..."
           />
         </div>
-        <div className="space-y-2 p-2">
-          <Label htmlFor="name" className="font-semibold">
-            Image
-          </Label>
-          <Input
-            required
-            type="file"
-            name="image"
-            placeholder="Upload image..."
-          />
-        </div>
-        <div className="p-2 mt-3">
+
+        <div className="mt-3 w-[20%] float-right m-2">
           <SubmitButton />
         </div>
       </form>

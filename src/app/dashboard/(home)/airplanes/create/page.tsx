@@ -7,7 +7,7 @@ export default function AirplanesCreatePage() {
     <>
       <Link href={"/dashboard/airplanes"} className="my-5 text-2xl font-bold flex items-center gap-x-2">
         <ArrowLeft />
-        Edit Airplanes
+        Create Airplanes
       </Link>
       <FormAirplane type="ADD" />
     </>

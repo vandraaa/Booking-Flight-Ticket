@@ -3,7 +3,7 @@
 import { ActionResult } from "@/app/dashboard/(auth)/signin/form/action";
 import { airplanesFormSchema } from "./validation";
 import { redirect } from "next/navigation";
-import { uploadFile } from "@/lib/supabase";
+import { deleteFile, uploadFile } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 
 export async function saveAirplane(prevState: any, formData: FormData): Promise<ActionResult> {
@@ -139,4 +139,41 @@ export async function updateAirplane(prevState: any, id: string, formData: FormD
 
     revalidatePath('/dashboard/airplanes')
     redirect('/dashboard/airplanes')
+}
+
+export async function deleteAirplane(id: string): Promise<ActionResult | undefined> {
+    const data = await prisma.airplane.findFirst({
+        where: {id: id}
+    })
+
+    if(!data) {
+        return {
+            errorTitle: 'Airplane not found',
+            errorMessage: ['Airplane not found.']
+        } as ActionResult
+    }
+
+    const deletedFile = await deleteFile(data?.image)
+
+    if(deletedFile instanceof Error) {
+        return {
+            errorTitle: 'Failed to delete file',
+            errorMessage: ['There was an error deleting the file. Please try again.' + Error]
+        } as ActionResult
+    }
+
+    try {
+        await prisma.airplane.delete({
+            where: {
+                id: id
+            }
+        })
+    } catch(err) {
+        return {
+            errorTitle: 'Failed to delete data',
+            errorMessage: ['There was an error deleting the data. Please try again.' + Error]
+        } as ActionResult
+    }
+
+    revalidatePath('/dashboard/airplanes')
 }
