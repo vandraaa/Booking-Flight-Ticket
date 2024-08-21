@@ -23,7 +23,9 @@ export default async function AirplanesPage() {
                     </Link>
                 </Button>
             </div>
-            <DataTable columns={column} data={flights} />
+            <div className="nb-5">
+                <DataTable columns={column} data={flights} />
+            </div>
         </>
     )
 }

@@ -7,6 +7,8 @@ import { Label } from "@radix-ui/react-label";
 import { useFormState, useFormStatus } from "react-dom";
 import { saveAirplane, updateAirplane } from "../lib/actions";
 import type { Airplane } from "@prisma/client";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 interface FormAirplaneProps {
   type: "ADD" | "EDIT";
@@ -44,6 +46,38 @@ export default function FormAirplane({
     type === "ADD" ? saveAirplane : updateAirplaneWithId,
     initialFormState
   );
+  const [hasShow, setHasShow] = useState(false);
+
+  useEffect(() => {
+    const showAlert = async () => {
+      if (state?.errorMessage && state?.errorTitle) {
+        await Swal.fire({
+          title: state.errorTitle,
+          text: state.errorMessage.join("\n"),
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+        setHasShow(false);
+      } else if (!hasShow && state?.success) {
+        const result = await Swal.fire({
+          title: "Success",
+          text: `Your airplane has been ${
+            type === "ADD" ? "created" : "updated"
+          } successfully.`,
+          icon: "success",
+          confirmButtonText: "OK",
+          allowOutsideClick: false,
+        }).then((res) => {
+          if (res.isConfirmed) {
+            window.location.replace("/dashboard/airplanes");
+            setHasShow(true);
+          }
+        });
+      }
+    };
+
+    showAlert();
+  }, [state, type, hasShow]);
 
   return (
     <>

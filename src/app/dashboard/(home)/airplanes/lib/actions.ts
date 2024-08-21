@@ -49,7 +49,8 @@ export async function saveAirplane(prevState: any, formData: FormData): Promise<
     }
 
     revalidatePath('/dashboard/airplanes')
-    redirect('/dashboard/airplanes')
+    return { success: true } as ActionResult
+    // redirect('/dashboard/airplanes')
 }
 
 export async function getAirplanesById(id: string) {
@@ -138,7 +139,8 @@ export async function updateAirplane(prevState: any, id: string, formData: FormD
     }
 
     revalidatePath('/dashboard/airplanes')
-    redirect('/dashboard/airplanes')
+    return { success: true } as ActionResult
+    // redirect('/dashboard/airplanes')
 }
 
 export async function deleteAirplane(id: string): Promise<ActionResult | undefined> {

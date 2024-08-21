@@ -12,10 +12,22 @@ import { Input } from "@/components/ui/input";
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Airplane } from "@prisma/client";
+import { useFormState } from "react-dom";
+import { saveFlights } from "../lib/action";
+import { ActionResult } from "@/app/dashboard/(auth)/signin/form/action";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 interface FormFlightsProps {
   airplanes: Airplane[];
 }
+
+const initialFormState: ActionResult = {
+  errorTitle: null,
+  errorMessage: [],
+  success: false,
+  successMessage: null,
+};
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();
@@ -32,9 +44,41 @@ const SubmitButton = () => {
 };
 
 export default function FormFlights({ airplanes }: FormFlightsProps) {
+  const [state, formAction] = useFormState(saveFlights, initialFormState);
+  const [hasShow, setHasShow] = useState(false);
   console.log(airplanes);
+
+
+  useEffect(() => {
+    const showAlert = async () => {
+      if (state?.errorMessage && state?.errorTitle) {
+        await Swal.fire({
+          title: state.errorTitle,
+          text: state.errorMessage.join("\n"),
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+        setHasShow(false);
+      } else if (!hasShow && state?.success) {
+        const result = await Swal.fire({
+          title: "Success",
+          text: `Your airplane has been saved successfully.`,
+          icon: "success",
+          confirmButtonText: "OK",
+          allowOutsideClick: false,
+        }).then((res) => {
+          if (res.isConfirmed) {
+            window.location.replace("/dashboard/airplanes");
+            setHasShow(true);
+          }
+        });
+      }
+    };
+
+    showAlert();
+  }, [state, hasShow]);
   return (
-    <form action="">
+    <form action={formAction}>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2 p-2">
           <Label htmlFor="planeId" className="font-semibold">
@@ -77,9 +121,8 @@ export default function FormFlights({ airplanes }: FormFlightsProps) {
           </Label>
           <Input
             required
-            type="number"
+            type="text"
             name="departureCity"
-            min={0}
             placeholder="Input departure city..."
           />
         </div>
@@ -102,9 +145,8 @@ export default function FormFlights({ airplanes }: FormFlightsProps) {
           </Label>
           <Input
             required
-            type="datetime-local"
+            type="text"
             name="departureCityCode"
-            min={0}
             className="block"
             placeholder="Input departure city code..."
           />
@@ -117,9 +159,8 @@ export default function FormFlights({ airplanes }: FormFlightsProps) {
           </Label>
           <Input
             required
-            type="number"
+            type="text"
             name="destinationCity"
-            min={0}
             placeholder="Input departure city..."
           />
         </div>
@@ -142,9 +183,8 @@ export default function FormFlights({ airplanes }: FormFlightsProps) {
           </Label>
           <Input
             required
-            type="datetime-local"
+            type="text"
             name="destinationCityCode"
-            min={0}
             className="block"
             placeholder="Input departure city code..."
           />
