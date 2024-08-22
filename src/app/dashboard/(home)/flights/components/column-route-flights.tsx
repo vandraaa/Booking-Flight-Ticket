@@ -17,7 +17,7 @@ const ColumnRouteFlight = ({ flight }: any) => {
           {flight.departureCity}
         </div>
         <div className="text-xs font-semibold text-slate-700">
-          {dateFormat(flight.departureDate)}
+          {dateFormat(flight.departureDate, "YYYY-MM-DD HH:mm")}
         </div>
       </div>
       <div className="font-bold">

@@ -14,7 +14,7 @@ export default async function FlightsCreatePage() {
         <ArrowLeft />
         Create Flights
       </Link>
-      <FormFlights airplanes={airplanes} />
+      <FormFlights airplanes={airplanes} type="ADD" />
     </>
   );
 }

@@ -178,4 +178,5 @@ export async function deleteAirplane(id: string): Promise<ActionResult | undefin
     }
 
     revalidatePath('/dashboard/airplanes')
+    // return { success: true, successMessage: 'Airplane deleted' } as ActionResult
 }

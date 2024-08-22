@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
-import { FC } from "react";
 import { useFormStatus } from "react-dom";
 import { deleteAirplane } from "../lib/actions";
 
@@ -12,7 +11,6 @@ interface DeleteAirplaneProps {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-
   return (
     <Button type="submit" variant="destructive" size={"sm"}>
       {pending ? (

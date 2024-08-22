@@ -8,6 +8,7 @@ import { Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ColumnRouteFlight from "./column-route-flights";
+import ColumnSeatPriceFlight from "./column-seatprice-flights";
 
 export type FlightsColumn = Flight & {
     plane: Airplane
@@ -45,7 +46,7 @@ export const column: ColumnDef<FlightsColumn>[] = [
         cell: ({row}: any) => {
             const flights = row.original
 
-            return 'Price'
+            return <ColumnSeatPriceFlight flight={flights} />
         }
     },
     {

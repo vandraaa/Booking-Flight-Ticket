@@ -1,4 +1,4 @@
-import { TypeSeat } from "@prisma/client"
+import { FlightSeat, TypeSeat } from "@prisma/client"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -34,7 +34,7 @@ export const generateSeatPerClass = (flightId: string) => {
   return seats
 }
 
-export const dateFormat = (date: Date, format = "DD MMM YYYY HH:mm") => {
+export const dateFormat = (date: Date, format = "YYYY-MM-DDTHH:MM") => {
   if (!date) {
     return "-";
   }
@@ -56,3 +56,45 @@ export const dateFormat = (date: Date, format = "DD MMM YYYY HH:mm") => {
 
   return `${formattedDate}, ${formattedTime}`;
 };
+
+export const dateFormatInput = (date: Date, format = "YYYY-MM-DDTHH:MM") => {
+  if (!date) {
+    return "-";
+  }
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
+
+export const rupiahFormat = (value: number) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(value);
+}
+
+export const mappingSeats = (seats: FlightSeat[]) => {
+  const totalSeatsEconomy = seats.filter((seat) => seat.type === "ECONOMY").length
+  const totalSeatsBusiness = seats.filter((seat) => seat.type === "BUSINESS").length
+  const totalSeatsFirst = seats.filter((seat) => seat.type === "FIRST").length
+
+  const ecomony = seats.filter((seat) => seat.type === "ECONOMY" && seat.isBooked).length
+  const business = seats.filter((seat) => seat.type === "BUSINESS" && seat.isBooked).length
+  const first = seats.filter((seat) => seat.type === "FIRST" && seat.isBooked).length
+
+  return {
+    totalSeatsEconomy,
+    totalSeatsBusiness,
+    totalSeatsFirst,
+    
+    ecomony,
+    business,
+    first
+  }
+}

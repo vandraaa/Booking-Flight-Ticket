@@ -5,10 +5,6 @@ import Link from "next/link";
 import { columsAirplanes } from "./components/column-table";
 import { getAirplanes } from "./lib/data";
 import { Metadata } from "next";
-import { useFormState } from "react-dom";
-import { ActionResult } from "../../(auth)/signin/form/action";
-import { useEffect } from "react";
-import Swal from "sweetalert2";
 
 export const metadata: Metadata = {
     title: "Dashboard - Airplanes",
