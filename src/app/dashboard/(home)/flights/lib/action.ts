@@ -88,3 +88,22 @@ export async function updateFlight(prevState: unknown, formData: FormData, id: s
     return { success: true, successMessage: 'Flight updated successfully' } as ActionResult
     // redirect('/dashboard/flights')
 }
+
+export async function deleteFlight(id: string) {
+    try {
+        await prisma.flightSeat.deleteMany({
+            where: {
+                flightId: id
+            }
+        })
+        await prisma.flight.delete({
+            where: {
+                id: id
+            }
+        })
+    } catch(err) {
+        console.log(err)
+    }
+
+    revalidatePath('/dashboard/flights')
+}

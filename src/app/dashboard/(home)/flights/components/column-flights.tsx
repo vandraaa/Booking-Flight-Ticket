@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ColumnRouteFlight from "./column-route-flights";
 import ColumnSeatPriceFlight from "./column-seatprice-flights";
+import DeleteFlight from "./delete-flight";
 
 export type FlightsColumn = Flight & {
     plane: Airplane
@@ -62,6 +63,7 @@ export const column: ColumnDef<FlightsColumn>[] = [
                             Edit
                         </Link>
                     </Button>
+                    <DeleteFlight id={flight.id} />
                 </div>
             )
         }
