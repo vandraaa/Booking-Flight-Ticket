@@ -1,0 +1,61 @@
+"use client";
+
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+
+export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="w-[80%] h-20 text-white flex mx-auto items-center justify-between bg-transparent relative">
+      <div className="flex items-center">
+        <Link href={"/"} className="text-2xl font-bold">FlyVin</Link>
+      </div>
+
+      <div
+        className="lg:hidden cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <Menu />
+      </div>
+
+      {isOpen && <div className="lg:hidden fixed top-0 left-0 w-full h-full bg-black/50 z-10" onClick={() => setIsOpen(false)} />}
+
+      <div
+        className={`flex flex-col lg:flex-row lg:items-center lg:space-x-6 lg:h-auto h-screen z-20 bg-gray-800 lg:bg-transparent w-[60%] lg:w-auto fixed lg:relative top-0 right-0 p-8 space-y-5 lg:space-y-0 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <div className="lg:hidden flex justify-between">
+          <h1 className="text-lg font-bold">Menu</h1>
+          <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+            <X />
+          </div>
+        </div>
+        <p className="text-sm font-semibold cursor-pointer pt-4 lg:pt-0 hover:text-slate-200 duration-300 ease-in-out">
+          Flash Sale
+        </p>
+        <p className="text-sm font-semibold cursor-pointer hover:text-slate-200 duration-300 ease-in-out">
+          Discover
+        </p>
+        <p className="text-sm font-semibold cursor-pointer hover:text-slate-200 duration-300 ease-in-out">
+          Stories
+        </p>
+        <p className="text-sm font-semibold cursor-pointer hover:text-slate-200 duration-300 ease-in-out">
+          About
+        </p>
+        <Link
+          href={"/sign-in"}
+          className={`${
+            isOpen
+              ? "bg-white text-black hover:bg-slate-200"
+              : "bg-slate-800 hover:bg-black text-white"
+          } font-semibold text-[13px] text-center px-6 py-[6px] rounded-3xl duration-300 ease-in`}
+        >
+          Sign In
+        </Link>
+      </div>
+    </div>
+  );
+};

@@ -9,6 +9,7 @@ import { saveAirplane, updateAirplane } from "../lib/actions";
 import type { Airplane } from "@prisma/client";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 interface FormAirplaneProps {
   type: "ADD" | "EDIT";
@@ -47,6 +48,7 @@ export default function FormAirplane({
     initialFormState
   );
   const [hasShow, setHasShow] = useState(false);
+  const {push} = useRouter();
 
   useEffect(() => {
     const showAlert = async () => {
@@ -59,6 +61,7 @@ export default function FormAirplane({
         });
         setHasShow(false);
       } else if (!hasShow && state?.success) {
+        push("/dashboard/airplanes");
         const result = await Swal.fire({
           title: "Success",
           text: `Your airplane has been ${
@@ -66,13 +69,8 @@ export default function FormAirplane({
           } successfully.`,
           icon: "success",
           confirmButtonText: "OK",
-          allowOutsideClick: false,
-        }).then((res) => {
-          if (res.isConfirmed) {
-            window.location.replace("/dashboard/airplanes");
-            setHasShow(true);
-          }
-        });
+        })
+        setHasShow(true);
       }
     };
 

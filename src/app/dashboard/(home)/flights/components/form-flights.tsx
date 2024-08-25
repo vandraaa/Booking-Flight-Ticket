@@ -18,6 +18,7 @@ import { ActionResult } from "@/app/dashboard/(auth)/signin/form/action";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { dateFormatInput } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface FormFlightsProps {
   airplanes: Airplane[];
@@ -61,6 +62,7 @@ export default function FormFlights({
 
   const [state, dispatch] = useFormState(formAction, initialFormState);
   const [hasShow, setHasShow] = useState(false);
+  const {push} = useRouter();
   console.log(defaultValues);
 
   useEffect(() => {
@@ -74,18 +76,14 @@ export default function FormFlights({
         });
         setHasShow(false);
       } else if (!hasShow && state?.success) {
+        push("/dashboard/flights");
         const result = await Swal.fire({
           title: "Success",
           text: `${state.successMessage}`,
           icon: "success",
           confirmButtonText: "OK",
-          allowOutsideClick: false,
-        }).then((res) => {
-          if (res.isConfirmed) {
-            window.location.replace("/dashboard/flights");
-            setHasShow(true);
-          }
-        });
+        })
+        setHasShow(true);
       }
     };
 
