@@ -1,9 +1,6 @@
-import { Metadata } from "next";
-import { HomeSection } from "./components/home-section";
+"use client"
 
-export const metadata: Metadata = {
-  title: "Andra Airlines",
-};
+import { HomeSection } from "./components/home-section";
 
 export default function Home() {
   return (

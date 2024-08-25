@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import "../font.css";
-import { HomeSection } from "./components/home-section";
 
 const inter = Inter({ subsets: ["latin"] });
 
