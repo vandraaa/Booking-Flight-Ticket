@@ -36,7 +36,7 @@ const SubmitButton = () => {
 const FormSignIn = () => {
   const [state, formAction] = useFormState(SignInUser, initialState);
   const [hasShow, setHasShow] = useState(false);
-  const { push } = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     const showAlert = async () => {
@@ -57,11 +57,11 @@ const FormSignIn = () => {
           allowOutsideClick: false,
         });
         setHasShow(true);
-        push("/");
+        router.push("/");
       }
     };
     showAlert();
-  }, [state]);
+  }, [state, hasShow, router]);
 
   return (
     <form action={formAction} className="mt-5 w-full space-y-4">

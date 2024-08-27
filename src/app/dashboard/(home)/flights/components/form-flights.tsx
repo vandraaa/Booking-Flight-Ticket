@@ -62,7 +62,7 @@ export default function FormFlights({
 
   const [state, dispatch] = useFormState(formAction, initialFormState);
   const [hasShow, setHasShow] = useState(false);
-  const {push} = useRouter();
+  const router = useRouter();
   console.log(defaultValues);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function FormFlights({
         });
         setHasShow(false);
       } else if (!hasShow && state?.success) {
-        push("/dashboard/flights");
+        router.push("/dashboard/flights");
         const result = await Swal.fire({
           title: "Success",
           text: `${state.successMessage}`,
@@ -88,7 +88,7 @@ export default function FormFlights({
     };
 
     showAlert();
-  }, [state, hasShow]);
+  }, [state, hasShow, router]);
   return (
     <form action={dispatch}>
       <div className="grid grid-cols-2 gap-4">
@@ -149,7 +149,7 @@ export default function FormFlights({
             type="datetime-local"
             name="departureDate"
             min={0}
-            defaultValue={dateFormatInput(defaultValues?.departureDate)}
+            defaultValue={dateFormatInput(defaultValues?.departureDate as Date)}
             className="block"
             placeholder="Input departure date..."
           />
@@ -191,7 +191,7 @@ export default function FormFlights({
             name="arrivalDate"
             min={0}
             className="block"
-            defaultValue={dateFormatInput(defaultValues?.arrivalDate)}
+            defaultValue={dateFormatInput(defaultValues?.arrivalDate as Date)}
             placeholder="Input departure date..."
           />
         </div>

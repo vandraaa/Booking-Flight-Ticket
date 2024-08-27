@@ -62,7 +62,7 @@ const FormSignUp = () => {
       }
     };
     showAlert();
-  }, [state]);
+  }, [state, hasShow, router]);
 
   return (
     <form action={formAction} className="mt-5 w-full space-y-4">

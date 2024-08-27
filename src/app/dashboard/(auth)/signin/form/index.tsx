@@ -52,7 +52,7 @@ const FormSignIn = () => {
         confirmButtonText: "OK",
       });
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <div className="w-full h-screen bg-[#f5f5f5]">

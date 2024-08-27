@@ -48,7 +48,7 @@ export default function FormAirplane({
     initialFormState
   );
   const [hasShow, setHasShow] = useState(false);
-  const {push} = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     const showAlert = async () => {
@@ -61,7 +61,7 @@ export default function FormAirplane({
         });
         setHasShow(false);
       } else if (!hasShow && state?.success) {
-        push("/dashboard/airplanes");
+        router.push("/dashboard/airplanes");
         const result = await Swal.fire({
           title: "Success",
           text: `Your airplane has been ${
@@ -75,7 +75,7 @@ export default function FormAirplane({
     };
 
     showAlert();
-  }, [state, type, hasShow]);
+  }, [state, hasShow, router, type]);
 
   return (
     <>

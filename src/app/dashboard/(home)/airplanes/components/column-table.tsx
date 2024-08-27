@@ -7,6 +7,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Pencil } from "lucide-react";
 import Link from "next/link";
 import DeleteAirplane from "./delete-airplane";
+import Image from "next/image";
 
 export const columsAirplanes: ColumnDef<Airplane>[] = [
     {
@@ -15,10 +16,12 @@ export const columsAirplanes: ColumnDef<Airplane>[] = [
         cell: ({row}: any) => {
             const airplane = row.original;
             return (
-                <img
+                <Image
                     src={getUrlFile(airplane.image)}
                     alt={airplane.name}
-                    className="w-auto h-[100px] mx-auto"
+                    width={100}
+                    height={100}
+                    className="mx-auto"
                 />
             )
         } 
