@@ -9,7 +9,7 @@ import {Navbar} from "../components/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Andra Airlines",
+  title: "FlyVin",
 };
 
 export default async function RootLayout({

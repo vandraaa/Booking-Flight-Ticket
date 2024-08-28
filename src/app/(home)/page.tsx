@@ -1,11 +1,16 @@
-// "use client"
+"use client"
 
-import HomeSection from "./components/home-section";
+import AboutSection from "./components/AboutSection";
+import AdvantagesSection from "./components/AdvantagesSection";
+import TestimonialSection from "./components/TestimonialSection";
+
 
 export default function Home() {
   return (
     <main>
-      {/* <HomeSection /> */}
+      <AboutSection />
+      <AdvantagesSection />
+      <TestimonialSection />
     </main>
   );
 }

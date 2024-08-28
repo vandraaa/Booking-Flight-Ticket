@@ -13,7 +13,7 @@ import { redirect } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Andra Airlines",
+  title: "Dashboard - FlyVin",
 };
 
 export default async function DashboardLayout({
@@ -34,7 +34,7 @@ export default async function DashboardLayout({
         <section>
           <nav className="border-b border-muted p-5 bg-sky-900 fixed w-full z-20">
             <div className="flex flex-row items-center justify-between">
-              <span className="font-bold text-white">Andra Airlines</span>
+              <span className="font-bold text-white">FlyVin</span>
             </div>
           </nav>
 

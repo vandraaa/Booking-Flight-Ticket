@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import "../font.css";
-import HomeSection from "./components/home-section";
 import {
   Select,
   SelectTrigger,
@@ -17,11 +16,12 @@ import { Button } from "@/components/ui/button";
 import { Plane } from "lucide-react";
 import { Navbar } from "../components/navbar";
 import { getFilterCity } from "./lib/data";
+import Footer from "../components/footer";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Andra Airlines",
+  title: "FlyVin",
 };
 
 export default async function RootLayout({
@@ -34,13 +34,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <section className="min-h-screen w-full bg-[url('/assets/background/plane.jpg')] bg-no-repeat bg-[20%] lg:bg-center bg-cover">
           <div className="absolute inset-0 bg-gradient-to-r from-black/95 to-transparent bg-black bg-opacity-20" />
           <div className="relative">
             <Navbar session={session} user={user} />
 
-            <div className="sm:w-[80%] w-[85%] mx-auto mt-8 sm:mt-20 my-16">
+            <div className="sm:w-[80%] w-[85%] mx-auto mt-8 sm:mt-20 mb-">
               <div className="text-white font-bold text-[26px] sm:text-5xl lg:text-5xl lg:space-y-2">
                 <h1>Booking Made Easy</h1>
                 <h1>For Endless Adventures</h1>
@@ -53,7 +53,7 @@ export default async function RootLayout({
                 </p>
               </div>
 
-              <div className="sm:mt-16 mt-8 w-full sm:w-[90%] mx-auto bg-white rounded-2xl px-6 py-4 sm:py-6">
+              <div className="sm:mt-16 mt-8 w-full sm:w-[95%] lg:w-[95%] 2xl:w-[80%] xl:w[90%] mx-auto bg-white rounded-2xl px-6 py-4 sm:px-4 sm:py-6">
                 <div className="flex flex-col lg:flex-row justify-center gap-y-4 lg:gap-y-0 lg:gap-x-4">
                   <div className="space-y-2 lg:w-auto w-full">
                     <p className="sm:text-sm text-xs font-semibold text-slate-700">
@@ -75,11 +75,6 @@ export default async function RootLayout({
                                 {item.departureCity}
                               </SelectItem>
                             ))}
-                            {/* {isLoading && (
-                              <SelectItem value="Loading...">
-                                Loading...
-                              </SelectItem>
-                            )} */}
                           </SelectContent>
                         </Select>
                       </div>
@@ -108,11 +103,6 @@ export default async function RootLayout({
                                 {item.destinationCity}
                               </SelectItem>
                             ))}
-                            {/* {isLoading && (
-                              <SelectItem value="Loading...">
-                                Loading...
-                              </SelectItem>
-                            )} */}
                           </SelectContent>
                         </Select>
                       </div>
@@ -142,7 +132,12 @@ export default async function RootLayout({
             </div>
           </div>
         </section>
-        {children}
+
+        <div className="relative z-10 m-0 p-0">
+          {children}
+        </div>
+
+        <Footer />
       </body>
     </html>
   );

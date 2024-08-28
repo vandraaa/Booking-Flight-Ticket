@@ -22,7 +22,7 @@ const SubmitButton = () => {
   const { pending } = useFormStatus();
 
   return (
-    <div className="w-[45%] mx-auto">
+    <div className="lg:w-[45%] w-full mx-auto">
       <Button variant={"default"} className="w-full mt-4" type="submit">
         {pending ? (
           <span className="loading loading-spinner loading-xs"></span>

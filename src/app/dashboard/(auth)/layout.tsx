@@ -5,7 +5,7 @@ import "../../globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Andra Airlines",
+  title: "Sign In - FlyVin",
 };
 
 export default function AuthLayout({

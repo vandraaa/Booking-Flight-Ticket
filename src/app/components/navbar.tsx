@@ -50,7 +50,7 @@ export const Navbar = ({ session, user }: any) => {
   };
 
   return (
-    <div className="w-[80%] h-20 text-white flex mx-auto items-center justify-between bg-transparent relative">
+    <div className="w-[80%] h-20 text-white flex mx-auto items-center justify-between z-20 bg-transparent relative">
       <div className="flex items-center">
         <Link href={"/"} className="text-2xl font-bold">
           FlyVin
