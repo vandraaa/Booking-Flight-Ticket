@@ -16,7 +16,7 @@ const CardTestimonial = () => {
             <p className="text-xs font-semibold text-gray-500">Customer</p>
         </div>
       </div>
-      <p className="italic text-gray-600 mt-2 text-sm">"FlyVin made my travel so easy!"</p>
+      <p className="italic font-medium text-gray-600 mt-2 text-sm">"FlyVin made my travel so easy!"</p>
     </div>
   );
 };
@@ -32,7 +32,7 @@ const TestimonialSection = () => {
           <p className="text-slate-400 lg:text-base sm:text-sm text-xs text-center font-semibold">
             Real Experience, Real Satisfaction.
           </p>
-          <div className="flex justify-center gap-x-6 mt-8">
+          <div className="flex justify-center flex-wrap gap-x-6 mt-8">
             <CardTestimonial />
             <CardTestimonial />
             <CardTestimonial />

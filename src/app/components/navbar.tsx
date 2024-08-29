@@ -72,7 +72,7 @@ export const Navbar = ({ session, user }: any) => {
       )}
 
       <div
-        className={`flex flex-col lg:flex-row lg:items-center lg:space-x-6 lg:h-auto h-screen z-20 bg-gray-800 lg:bg-transparent w-[60%] lg:w-auto fixed lg:relative top-0 right-0 p-8 space-y-5 lg:space-y-0 transform transition-transform duration-300 ease-in-out ${
+        className={`flex flex-col lg:flex-row lg:items-center lg:space-x-6 min-h-screen z-20 bg-gray-800 lg:bg-transparent w-[60%] lg:w-auto fixed lg:relative top-0 right-0 p-8 space-y-5 lg:space-y-0 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"
         }`}
       >

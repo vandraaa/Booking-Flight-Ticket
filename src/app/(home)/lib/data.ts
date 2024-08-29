@@ -4,12 +4,13 @@ import prisma from "../../../../lib/prisma"
 
 export const getFilterCity = async () => {
     try {
-        const data = await prisma.flight.groupBy({
+        const city = await prisma.flight.groupBy({
             by: ['departureCity', 'destinationCity'],
             where: {
                 departureDate: {
                     gt: new Date()
-                }
+                },
+                
             },
             _count: {
                 departureCity: true,
@@ -17,7 +18,7 @@ export const getFilterCity = async () => {
             }
         })
 
-        return data
+        return city
     } catch (err) {
         console.log(err)
     }
