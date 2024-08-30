@@ -5,7 +5,10 @@ import {
     SelectContent,
     SelectItem,
   } from "@/components/ui/select";
+import { TypeSeat } from "@prisma/client";
 import { Label } from "@radix-ui/react-label";
+
+const SEAT_OPTIONS: TypeSeat[] = ["BUSINESS", "ECONOMY", "FIRST"];
 
 const FilterClass = () => {
   return (
@@ -16,9 +19,11 @@ const FilterClass = () => {
           <SelectValue placeholder="Select Class" />
         </SelectTrigger>
         <SelectContent className="font-medium">
-          <SelectItem value="economy">Economy</SelectItem>
-          <SelectItem value="bussiness">Bussiness</SelectItem>
-          <SelectItem value="first">First</SelectItem>
+          {SEAT_OPTIONS.map((seat, i) => (
+            <SelectItem key={seat + i} value={seat}>
+              {seat}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
