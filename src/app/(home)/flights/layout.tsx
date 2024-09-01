@@ -1,4 +1,3 @@
-// "use client";
 
 import type { Metadata } from "next";
 import "../../globals.css";
@@ -17,14 +16,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    // <QCProvider>
-    //     <FlightsProvider>
-            <main>
-              {children}
-            </main>
-    //     {/* </FlightsProvider>
-    // </QCProvider> */}
+    <QCProvider>
+      <FlightsProvider>
+        {children}
+      </FlightsProvider>
+    </QCProvider>
   );
-}
+} 

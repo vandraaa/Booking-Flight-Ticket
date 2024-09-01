@@ -5,9 +5,13 @@ import { useQuery } from "@tanstack/react-query"
 import { createContext } from "react"
 import axios from "axios"
 
-type FlightsWithAirplane = Flight & {
-    plane: Airplane
+interface FlightsProviderProps {
+    children: React.ReactNode
 }
+
+export type FlightsWithAirplane = Flight & {
+    plane: Airplane
+} 
 
 export type FContext = {
     flights: FlightsWithAirplane[] | undefined,
@@ -16,11 +20,14 @@ export type FContext = {
 
 export const FlightsContext = createContext<FContext | null>(null)
 
-export default async function FlightsProvider({ children }: { children: React.ReactNode }) {
+const FlightsProvider: React.FC<FlightsProviderProps> = ({ children }) => {
 
     const {data, isLoading} = useQuery({
-        queryKey: ["flights-list"],
-        queryFn: () => axios.get("/api/flights").then((res) => res.data.data),
+        queryKey: ["list-flights"],
+        queryFn: async () => {
+            const res = await axios.get("/api/flights");
+            return res.data
+        }
     })
 
     return (
@@ -29,3 +36,5 @@ export default async function FlightsProvider({ children }: { children: React.Re
         </FlightsContext.Provider>
     )
 }
+
+export default FlightsProvider

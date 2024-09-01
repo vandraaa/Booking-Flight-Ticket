@@ -8,6 +8,7 @@ import { ListFlights } from "./components/list-flights";
 
 export default async function AvailableFlights() {
   const { session, user } = await getUser();
+  const flightLength = await prisma.flight.count();
   return (
     <main>
       <section className="sm:min-h-[45vh] min-h-[50vh] lg:min-h-[55vh] w-full bg-[url('/assets/background/plane.jpg')] bg-no-repeat bg-[20%] lg:bg-center bg-cover">
@@ -22,7 +23,7 @@ export default async function AvailableFlights() {
                   Semarang to Jakarta
                 </h1>
                 <p className="text-xs sm:text-sm font-semibold text-slate-200">
-                  512 Available Flights
+                  {flightLength} Available Flights
                 </p>
               </div>
               <div className="flex gap-x-8 sm:gap-x-6 gap-y-2 sm:gap-y-0 flex-wrap sm:flex-nowrap mt-6 sm:mt-12 lg:mt-0 text-xs sm:text-base">

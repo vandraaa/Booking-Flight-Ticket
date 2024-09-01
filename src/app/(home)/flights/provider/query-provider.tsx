@@ -1,13 +1,19 @@
 "use client"
 
-import { QueryClient } from "@tanstack/react-query"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+
+interface QCProviderProps {
+    children: React.ReactNode
+}
 
 const queryClient = new QueryClient()
 
-export default async function QCProvider({ children }: { children: React.ReactNode }) {
+const QCProvider: React.FC<QCProviderProps> = ({ children }) => {
     return (
-        <QCProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
             {children}
-        </QCProvider>
+        </QueryClientProvider>
     )
 }
+
+export default QCProvider
