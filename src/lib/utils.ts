@@ -107,3 +107,12 @@ export const getFormattedTime = (dateString: Date) => {
 
   return `${hours}.${minutes}`;
 }
+
+export const getFormattedDate = (dateString: Date) => {
+  const options = { day: 'numeric', month: 'short', year: 'numeric', locale: 'id-ID' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString('id-ID', options).replace('Jan', 'Jan').replace('Feb', 'Feb').replace('Mar', 'Mar')
+    .replace('Apr', 'Apr').replace('May', 'Mei').replace('Jun', 'Jun').replace('Jul', 'Jul')
+    .replace('Aug', 'Agu').replace('Sep', 'Sep').replace('Oct', 'Okt').replace('Nov', 'Nov')
+    .replace('Dec', 'Des');
+};

@@ -11,7 +11,6 @@ import {
 export const ListFlights = () => {
   const context = useContext(FlightsContext) as FContext;
 
-  // Mengakses array flights dari context.flights.data
   const flights: FlightsWithAirplane[] = context?.flights?.data ?? [];
   const isLoading = context?.isLoading ?? false;
 
@@ -20,10 +19,17 @@ export const ListFlights = () => {
   return (
     <div className="py-12 space-y-4 bg-slate-900">
       <div className="w-[80%] mx-auto">
-        <h1 className="text-white font-bold text-3xl">
-          Available Flights
-        </h1>
-        {flights.length > 0 && <p className="text-slate-300 font-semibold text-sm mb-8">Showing {flights.length} flights</p>}
+        {flights.length > 0 ? (
+          <>
+            <h1 className="text-white font-bold text-3xl">Available Flights</h1>
+            <p className="text-slate-300 font-semibold text-sm mb-8">
+              Showing {flights.length} flights
+            </p>
+          </>
+        ) : (
+          ""
+        )}
+
         {isLoading ? (
           <div className="text-slate-300 font-semibold text-sm py-20 text-center flex items-center justify-center">
             <p className="loading loading-bars loading-sm mr-2"></p>
@@ -40,7 +46,7 @@ export const ListFlights = () => {
             </p>
           </>
         ) : (
-          <p className="text-slate-300 font-semibold text-sm mt-6 text-center">
+          <p className="text-slate-300 font-semibold text-sm py-20 text-center">
             Flights Not Found
           </p>
         )}

@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { getUser } from "@/lib/auth";
 import { getFilterCity } from "./lib/data";
 import Footer from "../components/footer";
+import { exploreFlights } from "./lib/action";
 
 export default async function Home() {
   const data: any = await getFilterCity();
@@ -41,7 +42,7 @@ export default async function Home() {
             </div>
 
             <div className="sm:mt-16 mt-8 w-full sm:w-[95%] lg:w-[95%] 2xl:w-[80%] xl:w[90%] mx-auto bg-white rounded-2xl px-6 py-4 sm:px-4 sm:py-6">
-              <div className="flex flex-col lg:flex-row justify-center gap-y-4 lg:gap-y-0 lg:gap-x-4">
+              <form action={exploreFlights} className="flex flex-col lg:flex-row justify-center gap-y-4 lg:gap-y-0 lg:gap-x-4">
                 <div className="space-y-2 lg:w-auto w-full">
                   <p className="sm:text-sm text-xs font-semibold text-slate-700">
                     Departure City
@@ -49,7 +50,7 @@ export default async function Home() {
                   <div className="flex items-center font-bold text-sm sm:text-base">
                     <Plane />
                     <div className="ml-2 w-full lg:w-auto border-none border-0">
-                      <Select>
+                      <Select name="departure" required>
                         <SelectTrigger className="lg:w-[180px] w-full">
                           <SelectValue placeholder="Select Departure" />
                         </SelectTrigger>
@@ -77,7 +78,7 @@ export default async function Home() {
                   <div className="flex items-center font-bold text-sm sm:text-lg">
                     <Plane />
                     <div className="ml-2 w-full lg:w-auto border-none border-0">
-                      <Select>
+                      <Select name="destination" required>
                         <SelectTrigger className="lg:w-[180px] w-full">
                           <SelectValue placeholder="Select Destination" />
                         </SelectTrigger>
@@ -105,16 +106,18 @@ export default async function Home() {
                   <div className="flex items-center font-bold text-sm sm:text-lg">
                     <input
                       type="date"
+                      name="date" 
+                      required
                       className="border-none border-0 w-full lg:w-auto"
                     />
                   </div>
                 </div>
                 <div className="px-4 lg:ml-3 mt-3 sm:mt-0 sm:px-0 sm:w-auto w-full">
-                  <Button className="w-full lg:w-auto h-full">
+                  <Button type="submit" className="w-full lg:w-auto h-full">
                     Explore Now
                   </Button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

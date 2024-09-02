@@ -3,6 +3,7 @@
 import { getUser, lucia } from "@/lib/auth"
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function logout() {
     const {session} = await getUser();
@@ -28,4 +29,14 @@ export async function logout() {
         success: true,
         successMessage: 'Logout success',
     }
+}
+
+export async function exploreFlights(formData: FormData) {
+    const params = {
+        departure: formData.get('departure'),
+        destination: formData.get('destination'),
+        date: formData.get('date')
+    }
+
+    return redirect(`/flights?departure=${params.departure}&destination=${params.destination}&date=${params.date}`)
 }
