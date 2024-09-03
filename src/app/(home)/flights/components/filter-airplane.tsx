@@ -23,11 +23,7 @@ const FilterAirplane = () => {
     };
 
     fetchAirplanes();
-    dispatch({
-      type: FilterActionKind.CLEAR_PLANE,
-      payload: { planeId: "" }
-    })
-  }, [dispatch]);
+  }, []);
 
   const handleChange = (value: string) => {
     dispatch({

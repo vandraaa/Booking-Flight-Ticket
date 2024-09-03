@@ -6,6 +6,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export const CHECKOUT_KEY = 'CHECKOUT_KEY';
+
 export const generateSeatPerClass = (flightId: string) => {
   const SEAT_CLASS: TypeSeat[] = [
     "ECONOMY",
@@ -108,11 +110,34 @@ export const getFormattedTime = (dateString: Date) => {
   return `${hours}.${minutes}`;
 }
 
-export const getFormattedDate = (dateString: Date) => {
-  const options = { day: 'numeric', month: 'short', year: 'numeric', locale: 'id-ID' };
-  const date = new Date(dateString);
-  return date.toLocaleDateString('id-ID', options).replace('Jan', 'Jan').replace('Feb', 'Feb').replace('Mar', 'Mar')
-    .replace('Apr', 'Apr').replace('May', 'Mei').replace('Jun', 'Jun').replace('Jul', 'Jul')
-    .replace('Aug', 'Agu').replace('Sep', 'Sep').replace('Oct', 'Okt').replace('Nov', 'Nov')
-    .replace('Dec', 'Des');
+// export const getFormattedDate = (dateString: Date) => {
+//   const options = { day: 'numeric', month: 'short', year: 'numeric', locale: 'id-ID' };
+//   const date = new Date(dateString);
+//   return date.toLocaleDateString('id-ID', options).replace('Jan', 'Jan').replace('Feb', 'Feb').replace('Mar', 'Mar')
+//     .replace('Apr', 'Apr').replace('May', 'Mei').replace('Jun', 'Jun').replace('Jul', 'Jul')
+//     .replace('Aug', 'Agu').replace('Sep', 'Sep').replace('Oct', 'Okt').replace('Nov', 'Nov')
+//     .replace('Dec', 'Des');
+// };
+
+export const getFormattedDate = (date: Date, format = "YYYY-MM-DDTHH:MM") => {
+  if (!date) {
+    return "-";
+  }
+
+  const optionsDate: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  };
+
+  const optionsTime: Intl.DateTimeFormatOptions = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false, // 24-hour format
+  };
+
+  const formattedDate = date.toLocaleDateString("id-ID", optionsDate);
+  const formattedTime = date.toLocaleTimeString("id-ID", optionsTime);
+
+  return `${formattedDate}`;
 };

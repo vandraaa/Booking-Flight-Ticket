@@ -20,6 +20,7 @@ import { exploreFlights } from "./lib/action";
 
 export default async function Home() {
   const data: any = await getFilterCity();
+  console.log(data)
   const { session, user } = await getUser();
   return (
     <main>
@@ -57,10 +58,10 @@ export default async function Home() {
                         <SelectContent>
                           {data?.map((item: any, key: any) => (
                             <SelectItem
-                              key={`${key} ${item.departureCity}`}
-                              value={item.departureCity}
+                              key={item}
+                              value={item}
                             >
-                              {item.departureCity}
+                              {item}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -85,10 +86,10 @@ export default async function Home() {
                         <SelectContent>
                           {data?.map((item: any, key: any) => (
                             <SelectItem
-                              key={item.destinationCity}
-                              value={item.destinationCity}
+                              key={item}
+                              value={item}
                             >
-                              {item.destinationCity}
+                              {item}
                             </SelectItem>
                           ))}
                         </SelectContent>

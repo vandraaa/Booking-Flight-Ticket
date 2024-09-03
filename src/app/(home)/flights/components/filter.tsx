@@ -22,7 +22,7 @@ export default function Filter() {
         <div className="text-white">
           <h1 className="text-xl sm:text-3xl font-bold">{params.departure} to {params.destination}</h1>
           <p className="text-xs sm:text-sm font-semibold text-slate-200">
-            {getFormattedDate(getDate)}
+            {params.date ? getFormattedDate(getDate) : ""}
           </p>
         </div>
         <div className="flex gap-x-8 sm:gap-x-6 gap-y-2 sm:gap-y-0 flex-wrap sm:flex-nowrap mt-6 sm:mt-12 lg:mt-0 text-xs sm:text-base">

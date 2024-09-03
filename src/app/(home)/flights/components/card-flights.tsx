@@ -3,13 +3,11 @@ import { CircleArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FlightsWithAirplane } from "../provider/flights-provider";
 import { getUrlFile } from "@/lib/supabase";
-import { getFormattedTime, rupiahFormat } from "@/lib/utils";
-
-// interface FlightItemProps {
-//   data: FlightsWithAirplane
-// }
+import { CHECKOUT_KEY, getFormattedDate, getFormattedTime, rupiahFormat } from "@/lib/utils";
+import { useMemo } from "react";
 
 const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
+
   return (
     <div className="w-full bg-slate-200 rounded-xl py-5 px-6 sm:px-12 my-5 flex flex-col lg:flex-row justify-between">
       <div className="md:flex justify-between w-full lg:w-auto">
@@ -24,8 +22,8 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
           />
           <div className="ml-4">
             <h1 className="font-bold text-lg sm:text-2xl">{flight.plane.name}</h1>
-            <p className="font-semibold text-xs sm:text-sm text-slate-700">
-              {flight.plane.code}
+            <p className="font-semibold text-[9px] sm:text-xs text-slate-700">
+              {getFormattedDate(new Date(flight.departureDate))}
             </p>
             <p className="font-medium text-xs sm:text-sm text-slate-700">
               Economy Class

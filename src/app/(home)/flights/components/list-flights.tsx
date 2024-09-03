@@ -47,7 +47,7 @@ export const ListFlights = () => {
           </>
         ) : (
           <p className="text-slate-300 font-semibold text-sm py-20 text-center">
-            Flights Not Found
+            Flights Not Found. Try another filter.
           </p>
         )}
       </div>
