@@ -15,6 +15,7 @@ export enum FilterActionKind {
   REMOVE_PLANE = "REMOVE_PLANE",
   CLEAR_PLANE = "CLEAR_PLANE",
   FILTER_FLIGHTS = "FILTER_FLIGHTS",
+  SET_SEAT = "SET_SEAT",
 }
 
 type FilterState = {
@@ -28,7 +29,7 @@ type FilterState = {
 
 type FilterAction = {
   type: FilterActionKind;
-  payload: { planeId: string; date?: string | null; departure?: string | null; arrival?: string | null };
+  payload: { planeId: string; date?: string | null; departure?: string | null; arrival?: string | null, seat?: string | null };
 };
 
 function filterReducer(state: FilterState, action: FilterAction): FilterState {
@@ -60,6 +61,11 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
         departure: payload.departure || state.departure,
         arrival: payload.arrival || state.arrival,
       };
+    case FilterActionKind.SET_SEAT:
+      return {
+        ...state,
+        seat: payload.seat,
+      }
     default:
       return state;
   }
@@ -74,6 +80,7 @@ export type FContext = {
   isLoading: boolean;
   isError: boolean;
   dispatch: React.Dispatch<FilterAction>;
+  state: FilterState;
 };
 
 export const FlightsContext = createContext<FContext | null>(null);
@@ -105,7 +112,7 @@ const FlightsProvider: React.FC<FlightsProviderProps> = ({ children }) => {
   });
 
   return (
-    <FlightsContext.Provider value={{ flights: data, isLoading, isError: !!error, dispatch }}>
+    <FlightsContext.Provider value={{ flights: data, isLoading, isError: !!error, dispatch, state }}>
       {children}
     </FlightsContext.Provider>
   );

@@ -85,9 +85,9 @@ export const Navbar = ({ session, user }: any) => {
         <p className="text-sm font-semibold cursor-pointer pt-4 lg:pt-0 hover:text-slate-200 duration-300 ease-in-out">
           Flash Sale
         </p>
-        <p className="text-sm font-semibold cursor-pointer hover:text-slate-200 duration-300 ease-in-out">
-          Discover
-        </p>
+        <Link href={"/flights"} className="text-sm font-semibold cursor-pointer hover:text-slate-200 duration-300 ease-in-out">
+          Flights
+        </Link>
         <p className="text-sm font-semibold cursor-pointer hover:text-slate-200 duration-300 ease-in-out">
           About
         </p>

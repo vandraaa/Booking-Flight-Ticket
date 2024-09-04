@@ -1,19 +1,34 @@
 import Image from "next/image";
 import { CircleArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FlightsWithAirplane } from "../provider/flights-provider";
+import { FContext, FlightsContext, FlightsWithAirplane } from "../provider/flights-provider";
 import { getUrlFile } from "@/lib/supabase";
-import { CHECKOUT_KEY, getFormattedDate, getFormattedTime, rupiahFormat } from "@/lib/utils";
-import { useMemo } from "react";
+import { CHECKOUT_KEY, SeatValuesType, getFormattedDate, getFormattedTime, rupiahFormat } from "@/lib/utils";
+import { useContext, useMemo } from "react";
+import { SEAT_VALUE } from "./filter-class";
+import { useRouter } from "next/navigation";
 
 const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
+  const router = useRouter();
+  const { state } = useContext(FlightsContext) as FContext;
+
+  const selectedSeat = useMemo(() => {
+    return SEAT_VALUE[state.seat?.toUpperCase() as SeatValuesType] ?? SEAT_VALUE.ECONOMY;
+  }, [state.seat]);  
+
+  const bookNow = () => {
+    sessionStorage.setItem(CHECKOUT_KEY, JSON.stringify({
+      id: flight.id,
+      seat: state.seat?.toUpperCase() as SeatValuesType,
+    }))
+    router.push(`/choose-seat/${flight.id}`)
+  }
 
   return (
-    <div className="w-full bg-slate-200 rounded-xl py-5 px-6 sm:px-12 my-5 flex flex-col lg:flex-row justify-between">
+    <div key={flight.id} className="w-full bg-slate-200 rounded-xl py-5 px-6 sm:px-12 my-5 flex flex-col lg:flex-row justify-between">
       <div className="md:flex justify-between w-full lg:w-auto">
         <div className="flex items-center mb-4 md:mb-0">
           <Image
-            // src={"/assets/image/airplane1.jpg"}
             src={getUrlFile(flight.plane.image)}
             alt="airplane"
             width={80}
@@ -26,7 +41,7 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
               {getFormattedDate(new Date(flight.departureDate))}
             </p>
             <p className="font-medium text-xs sm:text-sm text-slate-700">
-              Economy Class
+              {selectedSeat.label} Class
             </p>
           </div>
         </div>
@@ -35,7 +50,7 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
             Price
           </p>
           <h1 className="font-bold text-base sm:text-xl leading-[0.96rem]">
-            {rupiahFormat(flight.price)}
+            {rupiahFormat(flight.price + selectedSeat.additionalPrice)}
           </h1>
         </div>
       </div>
@@ -52,7 +67,7 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
           </div>
         </div>
         <div className="my-auto hidden md:block lg:hidden">
-          <Button>Book Now</Button>
+          <Button onClick={bookNow}>Book Now</Button>
         </div>
       </div>
       <div className="my-auto flex items-center gap-x-6 justify-between md:hidden lg:flex w-full lg:w-auto">
@@ -61,11 +76,11 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
             Price
           </p>
           <h1 className="font-bold text-base sm:text-xl leading-[0.96rem]">
-            {rupiahFormat(flight.price)}
+            {rupiahFormat(flight.price + selectedSeat.additionalPrice)}
           </h1>
         </div>
         <div className="my-auto mt-2 sm:mt-1">
-          <Button>Book Now</Button>
+          <Button onClick={bookNow}>Book Now</Button>
         </div>
       </div>
     </div>

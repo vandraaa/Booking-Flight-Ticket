@@ -33,7 +33,7 @@ const FilterFlight = () => {
     const [departure, destination] = value.split("+");
     dispatch({
       type: FilterActionKind.FILTER_FLIGHTS,
-      payload: { date: "", departure, arrival: destination },
+      payload: { planeId: "", date: "", departure, arrival: destination },
     });    
     router.push(`/flights?departure=${departure}&destination=${destination}`);
   }

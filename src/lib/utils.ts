@@ -1,3 +1,4 @@
+import { SEAT_VALUE } from "@/app/(home)/flights/components/filter-class";
 import { FlightSeat, TypeSeat } from "@prisma/client"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -5,6 +6,8 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export type SeatValuesType = keyof typeof SEAT_VALUE;
 
 export const CHECKOUT_KEY = 'CHECKOUT_KEY';
 
@@ -109,15 +112,6 @@ export const getFormattedTime = (dateString: Date) => {
 
   return `${hours}.${minutes}`;
 }
-
-// export const getFormattedDate = (dateString: Date) => {
-//   const options = { day: 'numeric', month: 'short', year: 'numeric', locale: 'id-ID' };
-//   const date = new Date(dateString);
-//   return date.toLocaleDateString('id-ID', options).replace('Jan', 'Jan').replace('Feb', 'Feb').replace('Mar', 'Mar')
-//     .replace('Apr', 'Apr').replace('May', 'Mei').replace('Jun', 'Jun').replace('Jul', 'Jul')
-//     .replace('Aug', 'Agu').replace('Sep', 'Sep').replace('Oct', 'Okt').replace('Nov', 'Nov')
-//     .replace('Dec', 'Des');
-// };
 
 export const getFormattedDate = (date: Date, format = "YYYY-MM-DDTHH:MM") => {
   if (!date) {

@@ -20,7 +20,12 @@ export default function Filter() {
     <div className="sm:w-[80%] w-[85%] mx-auto mt-8 sm:mt-16">
       <div className="flex flex-col items-start lg:items-center lg:flex-row lg:justify-between justify-start">
         <div className="text-white">
-          <h1 className="text-xl sm:text-3xl font-bold">{params.departure} to {params.destination}</h1>
+          <h1 className="text-xl sm:text-3xl font-bold">
+            {params.departure && params.destination ? `${params.departure} to ${params.destination}` : "All Flights"}
+          </h1>
+          <p className="text-xs sm:text-sm font-semibold text-slate-200">
+            {params.departure && params.destination ? "" : "Filter to find your flight"}
+          </p>
           <p className="text-xs sm:text-sm font-semibold text-slate-200">
             {params.date ? getFormattedDate(getDate) : ""}
           </p>

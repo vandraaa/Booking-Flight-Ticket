@@ -17,7 +17,7 @@ export const ListFlights = () => {
   console.log(flights);
 
   return (
-    <div className="py-12 space-y-4 bg-slate-900">
+    <div className="py-12 space-y-4 bg-slate-950">
       <div className="w-[80%] mx-auto">
         {flights.length > 0 ? (
           <>
