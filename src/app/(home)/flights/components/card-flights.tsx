@@ -4,24 +4,27 @@ import { Button } from "@/components/ui/button";
 import { FContext, FlightsContext, FlightsWithAirplane } from "../provider/flights-provider";
 import { getUrlFile } from "@/lib/supabase";
 import { CHECKOUT_KEY, SeatValuesType, getFormattedDate, getFormattedTime, rupiahFormat } from "@/lib/utils";
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 import { SEAT_VALUE } from "./filter-class";
 import { useRouter } from "next/navigation";
 
 const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
   const router = useRouter();
   const { state } = useContext(FlightsContext) as FContext;
+  const [isLoading, setIsLoading] = useState(false);
 
   const selectedSeat = useMemo(() => {
     return SEAT_VALUE[state.seat?.toUpperCase() as SeatValuesType] ?? SEAT_VALUE.ECONOMY;
   }, [state.seat]);  
 
   const bookNow = () => {
+    setIsLoading(true)
     sessionStorage.setItem(CHECKOUT_KEY, JSON.stringify({
       id: flight.id,
       seat: state.seat?.toUpperCase() as SeatValuesType,
     }))
     router.push(`/choose-seat/${flight.id}`)
+    setIsLoading(false)
   }
 
   return (
@@ -67,7 +70,9 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
           </div>
         </div>
         <div className="my-auto hidden md:block lg:hidden">
-          <Button onClick={bookNow}>Book Now</Button>
+          <Button onClick={bookNow} disabled={isLoading}>
+            {isLoading ? "Loading..." : "Book Now"}
+          </Button>
         </div>
       </div>
       <div className="my-auto flex items-center gap-x-6 justify-between md:hidden lg:flex w-full lg:w-auto">

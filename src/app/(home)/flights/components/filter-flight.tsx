@@ -12,7 +12,9 @@ import { useRouter } from "next/navigation";
 import { FilterActionKind, FlightsContext } from "../provider/flights-provider";
 
 const FilterFlight = () => {
-  const [route, setRoute] = useState<{ departureCity: string; destinationCity: string }[]>([]);
+  const [route, setRoute] = useState<
+    { departureCity: string; destinationCity: string }[]
+  >([]);
   const { dispatch } = useContext(FlightsContext)!;
   const router = useRouter();
 
@@ -23,6 +25,7 @@ const FilterFlight = () => {
         setRoute(data);
       } catch (error) {
         console.error("Error fetching routes:", error);
+        setRoute([]);
       }
     };
 
@@ -34,9 +37,9 @@ const FilterFlight = () => {
     dispatch({
       type: FilterActionKind.FILTER_FLIGHTS,
       payload: { planeId: "", date: "", departure, arrival: destination },
-    });    
+    });
     router.push(`/flights?departure=${departure}&destination=${destination}`);
-  }
+  };
 
   return (
     <div className="space-y-2 sm:w-[180px] w-[130px] z-20 text-white">
@@ -46,11 +49,20 @@ const FilterFlight = () => {
           <SelectValue placeholder="Select Flight" />
         </SelectTrigger>
         <SelectContent className="font-medium">
-          {route.map((item, i) => (
-            <SelectItem key={i} value={`${item.departureCity}+${item.destinationCity}`}>
-              {item.departureCity} - {item.destinationCity}
-            </SelectItem>
-          ))}
+          {route === null ? (
+            <SelectItem value="no-routes" className="text-xs">No routes available</SelectItem>
+          ) : route.length > 0 ? (
+            route.map((item, i) => (
+              <SelectItem
+                key={i}
+                value={`${item.departureCity}+${item.destinationCity}`}
+              >
+                {item.departureCity} - {item.destinationCity}
+              </SelectItem>
+            ))
+          ) : (
+            <SelectItem value="loading" className="text-xs">Loading...</SelectItem>
+          )}
         </SelectContent>
       </Select>
     </div>

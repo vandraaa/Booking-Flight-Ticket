@@ -14,7 +14,7 @@ import { FContext, FilterActionKind, FlightsContext } from "../provider/flights-
 
 const FilterAirplane = () => {
   const { dispatch } = useContext(FlightsContext) as FContext;
-  const [airlines, setAirlines] = useState<{ id: string; name: string }[]>([]);
+  const [airlines, setAirlines] = useState<{ id: string; name: string, code: string }[]>([]);
 
   useEffect(() => {
     const fetchAirplanes = async () => {
@@ -40,11 +40,15 @@ const FilterAirplane = () => {
           <SelectValue placeholder="Select Airplane" />
         </SelectTrigger>
         <SelectContent className="font-medium">
-          {airlines.map((item, i) => (
-            <SelectItem key={item.id + i} value={item.id}>
-              {item.name}
-            </SelectItem>
-          ))}
+          {airlines.length > 0 ? (
+            airlines.map((item, i) => (
+              <SelectItem key={item.id} value={item.id}>
+                {item.name} <span className="text-[10px]">({item.code})</span>
+              </SelectItem>
+            ))
+          ) : (
+            <SelectItem value="no-airlines" className="text-xs">Loading...</SelectItem>
+          )}
         </SelectContent>
       </Select>
     </div>
