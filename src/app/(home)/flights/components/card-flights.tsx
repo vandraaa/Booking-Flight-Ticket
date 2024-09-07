@@ -70,7 +70,7 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
           </div>
         </div>
         <div className="my-auto hidden md:block lg:hidden">
-          <Button onClick={bookNow} disabled={isLoading}>
+          <Button onClick={bookNow}>
             {isLoading ? "Loading..." : "Book Now"}
           </Button>
         </div>
@@ -85,7 +85,9 @@ const CardFlights = ({ flight }: { flight: FlightsWithAirplane }) => {
           </h1>
         </div>
         <div className="my-auto mt-2 sm:mt-1">
-          <Button onClick={bookNow}>Book Now</Button>
+          <Button onClick={bookNow}>
+            {isLoading ? "Loading..." : "Book Now"}
+          </Button>
         </div>
       </div>
     </div>

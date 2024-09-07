@@ -7,6 +7,7 @@ import {
   FlightsContext,
   FlightsWithAirplane,
 } from "../provider/flights-provider";
+import SkeletonCardFlights from "./loading-card";
 
 export const ListFlights = () => {
   const context = useContext(FlightsContext) as FContext;
@@ -31,9 +32,10 @@ export const ListFlights = () => {
         )}
 
         {isLoading ? (
-          <div className="text-slate-300 font-semibold text-sm py-20 text-center flex items-center justify-center">
-            <p className="loading loading-bars loading-sm mr-2"></p>
-            Loading...
+          <div className="space-y-5">
+            <SkeletonCardFlights />
+            <SkeletonCardFlights />
+            <SkeletonCardFlights />
           </div>
         ) : flights.length > 0 ? (
           <>
