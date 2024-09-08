@@ -1,25 +1,7 @@
-import SeatList from "./components/seat-list";
-import FlightsDetail from "./components/flights-detail";
-import { getFlightById } from "../../lib/data";
-import { Airplane, Flight, FlightSeat } from "@prisma/client";
+import SkeletonFlightsDetail from "./[id]/components/loading-flights-detail";
+import SkeletonSeatList from "./[id]/components/loading-seat";
 
-type Params = {
-  id: string
-}
-
-interface ChooseSeatProps {
-  params: Params
-}
-
-export type FlightProps = Flight & { seats: FlightSeat[], plane: Airplane[] };
-
-interface FlightsDetailProps {
-  flight: FlightProps;
-}
-
-export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
-  const flight = await getFlightById(params.id);
-  console.log(flight)
+export default function Loading() {
 
   return (
     <div className="bg-[#0a0920] min-h-screen py-12 mt:py-0 flex flex-col justify-center">
@@ -49,12 +31,10 @@ export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
                 <label htmlFor="r3">Available</label>
               </div>
             </div>
-            <div className="mt-4">
-              {flight && <SeatList seats={flight.seats} />}
-            </div>
+            <SkeletonSeatList />
           </div>
 
-          {flight && <FlightsDetail flight={flight} /> }
+          <SkeletonFlightsDetail />
         </div>
       </div>
     </div>

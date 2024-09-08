@@ -1,10 +1,17 @@
 import { SEAT_VALUE } from "@/app/(home)/flights/components/filter-class";
-import { FlightSeat, TypeSeat } from "@prisma/client"
+import { Airplane, Flight, FlightSeat, TypeSeat } from "@prisma/client"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+export type Checkout = {
+  id?: string,
+  seat?: TypeSeat,
+  flightDetail: Flight & { plane: Airplane },
+  seatDetail: FlightSeat
 }
 
 export type SeatValuesType = keyof typeof SEAT_VALUE;
