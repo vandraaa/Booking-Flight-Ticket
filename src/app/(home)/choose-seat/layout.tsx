@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import "../globals.css";
-import "../font.css";
-
+import "../../globals.css";
+import "../../font.css";
+import SeatProvider from "./[id]/provider/seat-provider";
 
 export const metadata: Metadata = {
-  title: "FlyVin",
+  title: "FlyVin - Choose Seat",
 };
 
 export default async function RootLayout({
@@ -16,7 +16,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <SeatProvider>{children}</SeatProvider>
       </body>
     </html>
   );

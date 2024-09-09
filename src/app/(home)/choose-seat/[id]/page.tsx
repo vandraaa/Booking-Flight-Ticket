@@ -2,6 +2,8 @@ import SeatList from "./components/seat-list";
 import FlightsDetail from "./components/flights-detail";
 import { getFlightById } from "../../lib/data";
 import { Airplane, Flight, FlightSeat } from "@prisma/client";
+import { Session } from "lucia";
+import { getUser } from "@/lib/auth";
 
 type Params = {
   id: string
@@ -15,9 +17,11 @@ export type FlightProps = Flight & { seats: FlightSeat[], plane: Airplane[] };
 
 interface FlightsDetailProps {
   flight: FlightProps;
+  session: Session | null;
 }
 
 export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
+  const { user, session } = await getUser()
   const flight = await getFlightById(params.id);
   console.log(flight)
 
@@ -25,7 +29,7 @@ export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
     <div className="bg-[#0a0920] min-h-screen py-12 mt:py-0 flex flex-col justify-center">
       <div className="w-[90%] md:w-[85%] lg:w-[70%] mx-auto">
         <div className="flex justify-between md:space-x-20 lg:space-x-32 md:flex-row space-x-0 flex-col">
-          <div className="w-auto">
+          <div className="w-auto mx-auto sm:mx-0">
             <h1 className="text-white font-bold mb-2 text-lg">
               Select your seat
             </h1>
@@ -54,7 +58,7 @@ export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
             </div>
           </div>
 
-          {flight && <FlightsDetail flight={flight} /> }
+          {flight && <FlightsDetail flight={flight} session={session} /> }
         </div>
       </div>
     </div>
