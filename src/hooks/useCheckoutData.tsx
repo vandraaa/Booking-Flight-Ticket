@@ -1,7 +1,9 @@
+"use client"    
+
 import { CHECKOUT_KEY, Checkout } from "@/lib/utils"
 import { useEffect, useState } from "react"
 
-const useCheckoutData = () => {
+export default function useCheckoutData() {
     const [data, setData] = useState<Checkout | null>(null)
 
     useEffect(() => {
@@ -14,7 +16,5 @@ const useCheckoutData = () => {
         }
     }, [])
 
-    return data
+    return {data}
 }
-
-export default useCheckoutData

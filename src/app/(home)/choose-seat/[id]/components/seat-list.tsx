@@ -14,17 +14,23 @@ interface SeatItemProps {
 }
 
 function SeatCard({ seat }: SeatItemProps) {
-  const { setSelectedSeat, seat: selectedSeat } = useContext(SeatContext) as SeatContextType;
+  const { setSelectedSeat, seat: selectedSeat } = useContext(
+    SeatContext
+  ) as SeatContextType;
 
   return (
     <div
+      onClick={() => {
+        setSelectedSeat(seat);
+      }}
       className={`aspect-square hover:bg-sky-500 hover:border-sky-500 duration-300 ease-in cursor-pointer 
     ${
       seat.isBooked
         ? "bg-gray-500 cursor-not-allowed"
+        : selectedSeat?.seatNumber === seat.seatNumber
+        ? "bg-sky-500 border-sky-500"
         : "bg-transparent border-white"
     } 
-    ${seat === selectedSeat ? "bg-sky-500 border-sky-500" : ""} 
     border-[2px] rounded-md p-4 text-white font-medium text-center`}
     >
       <label htmlFor={seat.seatNumber}>{seat.seatNumber}</label>
@@ -35,13 +41,11 @@ function SeatCard({ seat }: SeatItemProps) {
         value={seat.seatNumber}
         className="appearance-none hidden"
         disabled={seat.isBooked ?? false}
-        onClick={() => {
-          setSelectedSeat(seat);
-        }}
       />
     </div>
   );
 }
+
 export default function SeatList({ seats }: SeatListProps) {
   const checkout = useCheckoutData();
   // console.log(checkout);

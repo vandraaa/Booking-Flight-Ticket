@@ -34,13 +34,13 @@ export async function handleSignIn(prevState: any, formData: FormData): Promise<
     })
 
     if (!existingUser) {
-        return { errorTitle: 'Error Validation', errorMessage: ['Email not found'] || null, success: false, successMessage: null }
+        return { errorTitle: 'Error Validation', errorMessage: ['Email not found'], success: false, successMessage: null }
     }
 
     const validPassword = await bcrypt.compare(values.data.password, existingUser.password)
 
     if(!validPassword) {
-        return { errorTitle: 'Error Validation', errorMessage: ['Password not match'] || null, success: false, successMessage: null }
+        return { errorTitle: 'Error Validation', errorMessage: ['Password not match'], success: false, successMessage: null }
     }
 
     const session = await lucia.createSession(existingUser.id, {})

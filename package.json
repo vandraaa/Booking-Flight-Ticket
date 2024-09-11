@@ -39,6 +39,7 @@
     "oslo": "^1.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "sharp": "^0.33.5",
     "sweetalert2": "^11.6.13",
     "tailwind-merge": "^2.5.1",
     "tailwindcss-animate": "^1.0.7",

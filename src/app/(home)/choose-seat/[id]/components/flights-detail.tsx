@@ -16,6 +16,7 @@ import { useContext, useMemo } from "react";
 import { SeatContext, SeatContextType } from "../provider/seat-provider";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function FlightsDetail({ flight, session }: any) {
   const data = useCheckoutData();
@@ -107,9 +108,11 @@ export default function FlightsDetail({ flight, session }: any) {
       </div>
       <div className="mt-8">
         <div className="w-[300px] h-[120px] ">
-          <img
+          <Image
             src={getUrlFile(flight.plane.image)}
             alt="airplane"
+            width={300}
+            height={120}
             className="rounded-lg size-full object-cover"
           />
         </div>

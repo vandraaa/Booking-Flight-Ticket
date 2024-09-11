@@ -120,25 +120,20 @@ export const getFormattedTime = (dateString: Date) => {
   return `${hours}.${minutes}`;
 }
 
-export const getFormattedDate = (date: Date, format = "YYYY-MM-DDTHH:MM") => {
-  if (!date) {
-    return "-";
+export const getFormattedDate = (date: string | Date) => {
+  if (typeof date === "string") {
+    date = new Date(date);
   }
 
-  const optionsDate: Intl.DateTimeFormatOptions = {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  };
+  if (date instanceof Date && !isNaN(date.getTime())) {
+    const optionsDate: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
 
-  const optionsTime: Intl.DateTimeFormatOptions = {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false, // 24-hour format
-  };
-
-  const formattedDate = date.toLocaleDateString("id-ID", optionsDate);
-  const formattedTime = date.toLocaleTimeString("id-ID", optionsTime);
-
-  return `${formattedDate}`;
+    return date.toLocaleDateString("id-ID", optionsDate);
+  } else {
+    throw new Error("Invalid date");
+  }
 };

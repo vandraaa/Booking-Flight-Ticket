@@ -5,9 +5,14 @@ const nextConfig = {
 
     return config;
   },
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     remotePatterns: [{ protocol: "https", hostname: "murwzqfqjehycriqsexo.supabase.co" }],
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  }
 };
 
 export default nextConfig;

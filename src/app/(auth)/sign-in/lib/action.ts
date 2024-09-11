@@ -65,5 +65,5 @@ export async function SignInUser(prevState: unknown, formData: FormData): Promis
     )
 
     // redirect('/')
-    return { errorTitle: null, errorMessage: null, success: true, successMessage: "Sign in successfully!" }
+    return { errorTitle: null, errorMessage: [], success: true, successMessage: "Sign in successfully!" }
 }

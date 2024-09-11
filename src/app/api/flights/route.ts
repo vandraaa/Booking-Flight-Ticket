@@ -1,5 +1,6 @@
 import { TypeSeat } from "@prisma/client";
 import { NextRequest } from "next/server";
+import prisma from "../../../../lib/prisma";
 
 export async function POST(request: NextRequest) {
   // const searchParams = request.nextUrl.searchParams;
