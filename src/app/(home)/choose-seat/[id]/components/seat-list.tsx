@@ -21,15 +21,17 @@ function SeatCard({ seat }: SeatItemProps) {
   return (
     <div
       onClick={() => {
-        setSelectedSeat(seat);
+        if (!seat.isBooked) {
+          setSelectedSeat(seat);
+        }
       }}
-      className={`aspect-square hover:bg-sky-500 hover:border-sky-500 duration-300 ease-in cursor-pointer 
+      className={`aspect-square duration-300 ease-in cursor-pointer 
     ${
       seat.isBooked
-        ? "bg-gray-500 cursor-not-allowed"
+        ? "bg-gray-500 cursor-not-allowed border-gray-500 disabled"
         : selectedSeat?.seatNumber === seat.seatNumber
         ? "bg-sky-500 border-sky-500"
-        : "bg-transparent border-white"
+        : "bg-transparent border-white hover:bg-sky-500 hover:border-sky-500"
     } 
     border-[2px] rounded-md p-4 text-white font-medium text-center`}
     >
@@ -40,14 +42,14 @@ function SeatCard({ seat }: SeatItemProps) {
         id={seat.seatNumber}
         value={seat.seatNumber}
         className="appearance-none hidden"
-        disabled={seat.isBooked ?? false}
+        disabled={seat.isBooked === true}
       />
     </div>
   );
 }
 
 export default function SeatList({ seats }: SeatListProps) {
-  const checkout = useCheckoutData();
+  const checkout = useCheckoutData().data;
   // console.log(checkout);
 
   const { seatA, seatB, seatC, seatD } = useMemo(() => {

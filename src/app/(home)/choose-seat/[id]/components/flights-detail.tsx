@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function FlightsDetail({ flight, session }: any) {
-  const data = useCheckoutData();
+  const data = useCheckoutData().data;
   const { replace, push } = useRouter();
 
   const { seat } = useContext(SeatContext) as SeatContextType;

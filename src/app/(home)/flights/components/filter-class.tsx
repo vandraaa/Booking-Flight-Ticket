@@ -49,7 +49,7 @@ const FilterClass = () => {
       <Label className="font-semibold">Seat Class</Label>
       <Select onValueChange={handleChange}>
         <SelectTrigger className="sm:w-[180px] w-[130px] font-medium">
-          <SelectValue placeholder="Select Class" />
+          <SelectValue placeholder="Select Class"  />
         </SelectTrigger>
         <SelectContent className="font-medium">
           {SEAT_OPTIONS.map((seat, i) => (

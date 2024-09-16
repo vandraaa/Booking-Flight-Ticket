@@ -97,7 +97,7 @@ model Ticket {
   seatId        String       @unique
   seat          FlightSeat   @relation(fields: [seatId], references: [id])
   bookingDate   DateTime
-  price         BigInt
+  price         Int
   status        StatusTicket
   tokenMidtrans String?
 }

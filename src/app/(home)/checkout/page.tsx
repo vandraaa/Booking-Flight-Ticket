@@ -26,7 +26,7 @@ export default async function CheckoutPage() {
                 <h1 className="font-bold">Avoid Crowds</h1>
               </div>
             </div>
-            <Payment />
+            <Payment user={user} />
           </div>
         </div>
       </div>

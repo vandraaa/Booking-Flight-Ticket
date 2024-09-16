@@ -8,12 +8,13 @@ import { ArrowRightCircle } from "lucide-react";
 import Image from "next/image";
 import SkeletonCardCheckout from "./skeleton-card";
 
-interface FlightCardProps {
+export interface FlightCardProps {
   user: User | null;
 }
 
 export default function CardCheckout({ user }: FlightCardProps) {
   const data = useCheckoutData().data;
+  console.log(user?.id)
 
   if (!data) {
     return (
