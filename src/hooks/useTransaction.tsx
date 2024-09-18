@@ -7,7 +7,6 @@ import { SEAT_VALUE } from "@/app/(home)/flights/components/filter-class";
 import { SeatValuesType } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -34,15 +33,17 @@ const useTransaction = ({user}: Props) => {
             return null
         }
 
-        const seatDetail = data?.seatDetail as { price: number } | undefined;
-        const price = Number((seatDetail?.price ?? 0) + selectedSeat.additionalPrice);
+        const price = data
+        ? data?.flightDetail.price + selectedSeat.additionalPrice
+        : 0;
+        const insurance = price ? price * 0.24 : 0;
+        const total = price ? price + insurance + 200000 : 0;
 
         const bodyData = {
             bookingDate: new Date(),
-            price,
+            price: total,
             flightId: data?.flightDetail?.id,
             seatId: data?.seatDetail?.id,
-            tokenMidtrans: "",
             departureCityCode: data?.flightDetail.departureCityCode,
             destinationCityCode: data?.flightDetail.destinationCityCode,
         };
@@ -54,35 +55,19 @@ const useTransaction = ({user}: Props) => {
 
             // handle midtrans
             window.snap.pay(transaction.midtrans.token, {
-                onSuccess: function(result: any){
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Payment success!'
-                  })
+                onSuccess: function(result: unknown){
+                  console.log(result)
                   router.push('/success-checkout')
                 },
-                onPending: function(result: any){
-                  Swal.fire({
-                    icon: 'info',
-                    title: 'Pending',
-                    text: 'Payment pending!'
-                  })
+                onPending: function(result: unknown){
+                  console.log(result)
                   router.push('/success-checkout')
                 },
-                onError: function(result: any){
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Payment failed! Please Try Again'
-                  })
+                onError: function(result: unknown){
+                  console.log(result)
                 },
-                onClose: function(){
-                  Swal.fire({
-                    icon: 'info',
-                    title: 'Info',
-                    text: 'Payment failed! Please Try Again'
-                  })
+                onClose: function(result: unknown){
+                  console.log(result)
                 }
               })
             // handle midtrans

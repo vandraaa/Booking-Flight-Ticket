@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "../globals.css";
-import "../font.css";
+import "../../globals.css";
+import "../../font.css";
 
 export const metadata: Metadata = {
-  title: "FlyVin",
+  title: "FlyVin- Success",
 };
 
 export default async function RootLayout({
