@@ -61,7 +61,6 @@ export async function POST(request: NextRequest) {
         Accept: "application/json",
         "Content-type": "application/json",
         Authorization: `Basic ${process.env.NEXT_PUBLIC_MIDTRANS_AUTH_KEY}`,
-        // Authorization: `Basic U0ItTWlkLXNlcnZlci1RZnRiVTRMVW9sNmF6ZjZqYjZyRFpfNmU6`,
       },
       body: JSON.stringify(params),
     });

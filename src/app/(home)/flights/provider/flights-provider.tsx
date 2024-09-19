@@ -100,7 +100,7 @@ const FlightsProvider: React.FC<FlightsProviderProps> = ({ children }) => {
     departure: params.departure,
     planeId: "",
     planeIds: [],
-    seat: null,
+    seat: "ECONOMY",
   });
 
   const { data, isLoading, error } = useQuery({

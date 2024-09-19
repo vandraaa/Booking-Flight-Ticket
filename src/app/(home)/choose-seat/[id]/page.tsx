@@ -35,21 +35,15 @@ export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
             </h1>
             <div className="flex gap-x-3 text-white font-medium text-sm">
               <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  id="r1"
-                  name="seat"
-                  value="selected"
-                  defaultChecked
-                />
+                <div className="size-3 bg-[#0EA5E9] rounded-full" />
                 <label htmlFor="r1">Selected</label>
               </div>
               <div className="flex items-center space-x-2">
-                <input type="radio" id="r2" name="seat" value="taken" />
+                <div className="size-3 bg-[#6B7280] rounded-full" />
                 <label htmlFor="r2">Taken</label>
               </div>
               <div className="flex items-center space-x-2">
-                <input type="radio" id="r3" name="seat" value="available" />
+                <div className="size-3 bg-[#FFF] rounded-full" />
                 <label htmlFor="r3">Available</label>
               </div>
             </div>
