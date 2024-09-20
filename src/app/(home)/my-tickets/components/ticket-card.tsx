@@ -4,6 +4,7 @@ import { getFormattedDate, getFormattedTime } from "@/lib/utils";
 import { Airplane, Flight, FlightSeat } from "@prisma/client";
 import { CircleArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Data = Pick<Flight, "id"> & { 
     flight: Pick<Flight, "departureDate" | "arrivalDate" | "departureCity" | "destinationCity"> & {
@@ -55,9 +56,9 @@ export default function TicketCard({data}: TicketProps) {
             <p className="font-semibold text-xs text-slate-700">{data.flight.destinationCity}</p>
           </div>
         </div>
-        <div className="my-auto hidden md:block lg:hidden">
+        <Link href={`/my-tickets/detail/${data.id}`} className="my-auto hidden md:block lg:hidden">
           <Button>Detail Ticket</Button>
-        </div>
+        </Link>
       </div>
       <div className="my-auto flex items-center gap-x-6 justify-between md:hidden lg:flex w-full lg:w-auto">
         <div className="my-auto">
@@ -65,9 +66,9 @@ export default function TicketCard({data}: TicketProps) {
           {getFormattedDate(data.flight.departureDate)}
           </h1>
         </div>
-        <div className="my-auto mt-2 sm:mt-1">
+        <Link href={`/my-tickets/detail/${data.id}`} className="my-auto mt-2 sm:mt-1">
           <Button>Detail Ticket</Button>
-        </div>
+        </Link>
       </div>
     </div>
   );
