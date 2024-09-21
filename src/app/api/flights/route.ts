@@ -3,16 +3,6 @@ import { NextRequest } from "next/server";
 import prisma from "../../../../lib/prisma";
 
 export async function POST(request: NextRequest) {
-  // const searchParams = request.nextUrl.searchParams;
-
-  // const params = {
-  //   departure: searchParams.get("departure"),
-  //   arrival: searchParams.get("arrival"),
-  //   date: searchParams.get("date"),
-  //   planeId: searchParams.get("planeId"),
-  //   seat: searchParams.get("seat"),
-  // };
-
   const body = await request.json();
 
   let departureDate: Date | null = null;
