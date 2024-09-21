@@ -64,6 +64,5 @@ export async function SignInUser(prevState: unknown, formData: FormData): Promis
         sessionCookie.attributes
     )
 
-    // redirect('/')
     return { errorTitle: null, errorMessage: [], success: true, successMessage: "Sign in successfully!" }
 }

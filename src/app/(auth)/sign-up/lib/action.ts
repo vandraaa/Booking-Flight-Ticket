@@ -36,6 +36,25 @@ export async function signUpUser(prevState: unknown, formData: FormData): Promis
         }
     })
 
-    // return redirect("/sign-in")
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            email: validate.data.email
+        }
+    })
+
+    if (!existingUser) {
+        return { errorTitle: 'Error Validation', errorMessage: ['Email not found'], success: false, successMessage: null }
+    }
+
+    const existingPassport = await prisma.user.findUnique({
+        where: {
+            passport: validate.data.passport
+        }
+    })
+
+    if (!existingPassport) {
+        return { errorTitle: 'Error Validation', errorMessage: ['Passport not found'], success: false, successMessage: null }
+    }
+
     return { successMessage: "Sign Up Successfully! Please Sign In to continue", success: true, errorTitle: null, errorMessage: [] };
 }
