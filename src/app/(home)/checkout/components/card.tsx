@@ -106,7 +106,7 @@ export default function CardCheckout({ user }: FlightCardProps) {
           </div>
           <div className="w-full flex justify-between items-center text-slate-900 text-xs md:text-sm">
             <p className="font-medium">Seat Choosen</p>
-            <p className="font-semibold">A1</p>
+            <p className="font-semibold">{data.seatDetail.seatNumber}</p>
           </div>
           <div className="w-full flex justify-between items-center text-slate-900 text-xs md:text-sm">
             <p className="font-medium">Passport</p>

@@ -1,7 +1,6 @@
 import { getUser } from "@/lib/auth";
 import CardCheckout from "./components/card";
 import Payment from "./components/payment-detail";
-import useCheckoutData from "@/hooks/useCheckoutData";
 
 export default async function CheckoutPage() {
   const { user } = await getUser();
