@@ -2,9 +2,9 @@
 
 import { ActionResult } from "@/app/dashboard/(auth)/signin/form/action";
 import { airplanesFormSchema } from "./validation";
-import { redirect } from "next/navigation";
 import { deleteFile, uploadFile } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
+import prisma from "../../../../../../lib/prisma";
 
 export async function saveAirplane(prevState: any, formData: FormData): Promise<ActionResult> {
     const values = airplanesFormSchema.safeParse({

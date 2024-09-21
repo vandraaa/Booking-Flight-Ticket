@@ -1,5 +1,7 @@
 "use server"
 
+import prisma from "../../../../../../lib/prisma"
+
 export const getTickets = async () => {
     try {
         const data = await prisma.ticket.findMany({
