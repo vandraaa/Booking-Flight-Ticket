@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 interface FormAirplaneProps {
   type: "ADD" | "EDIT";
-  defaultValues?: Airplane | undefined;
+  defaultValues?: Airplane | null;
 }
 
 const initialFormState: ActionResult = {
