@@ -9,5 +9,7 @@ export async function getAirplanes() {
         return planes
     } catch (error) {
         console.log(error)
+
+        return []
     }
 }
