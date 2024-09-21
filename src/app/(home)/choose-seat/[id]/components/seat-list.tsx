@@ -50,7 +50,6 @@ function SeatCard({ seat }: SeatItemProps) {
 
 export default function SeatList({ seats }: SeatListProps) {
   const checkout = useCheckoutData().data;
-  // console.log(checkout);
 
   const { seatA, seatB, seatC, seatD } = useMemo(() => {
     const rawSeats = seats.filter((seat) => seat.type === checkout?.seat);

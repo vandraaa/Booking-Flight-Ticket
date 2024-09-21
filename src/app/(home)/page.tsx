@@ -20,7 +20,6 @@ import { exploreFlights } from "./lib/action";
 
 export default async function Home() {
   const data: any = await getFilterCity();
-  console.log(data)
   const { session, user } = await getUser();
   return (
     <main>

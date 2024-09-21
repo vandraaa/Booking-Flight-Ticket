@@ -16,7 +16,6 @@ interface DetailTicketProps {
 export default async function DetailTicketPage({ params }: DetailTicketProps) {
   const { session, user } = await getUser();
   const data = await getTicketById(params.id);
-  console.log(data)
 
   return (
     <main>

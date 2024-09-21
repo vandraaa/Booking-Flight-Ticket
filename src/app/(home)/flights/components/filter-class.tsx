@@ -37,7 +37,6 @@ const FilterClass = () => {
   const { dispatch } = useContext(FlightsContext) as FContext;
 
   const handleChange = (value: string) => {
-    console.log(value);
 
     dispatch({
       type: FilterActionKind.SET_SEAT,

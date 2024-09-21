@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import FormSignUp from "./components/form-signup";
 
 export const metadata: Metadata = {
-  title: "Sign Up - Andra Airlines",
+  title: "Sign Up - FlyVin",
 };
 
 export default function SignUpPage() {

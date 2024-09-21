@@ -3,7 +3,7 @@ import "./globals.css";
 import "./font.css";
 
 export const metadata: Metadata = {
-  title: "Andra Airlines",
+  title: "FlyVin",
 };
 
 export default function RootLayout({

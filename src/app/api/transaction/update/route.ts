@@ -2,7 +2,6 @@ import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  console.log(body)
   
   const transactionId = body.order_id;
   const transactionStatus = body.transaction_status;

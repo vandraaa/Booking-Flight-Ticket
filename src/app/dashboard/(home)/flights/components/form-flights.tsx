@@ -63,7 +63,6 @@ export default function FormFlights({
   const [state, dispatch] = useFormState(formAction, initialFormState);
   const [hasShow, setHasShow] = useState(false);
   const router = useRouter();
-  console.log(defaultValues);
 
   useEffect(() => {
     const showAlert = async () => {

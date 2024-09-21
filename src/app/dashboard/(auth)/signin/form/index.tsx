@@ -19,7 +19,6 @@ const initialFormState: ActionResult = {
 const FormSignIn = () => {
   const [state, formAction] = useFormState(handleSignIn, initialFormState);
   const router = useRouter();
-  // console.log(state)
 
   useEffect(() => {
     if (state.success === true) {

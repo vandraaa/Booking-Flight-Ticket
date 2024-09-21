@@ -14,9 +14,7 @@ interface EditAirplanesPageProps {
 export default async function EditAirplanesPage({
   params,
 }: EditAirplanesPageProps) {
-  // console.log(params)
   const data = await getAirplanesById(params.id);
-  console.log(data);
   return (
     <>
       <div className="w-full flex justify-between">

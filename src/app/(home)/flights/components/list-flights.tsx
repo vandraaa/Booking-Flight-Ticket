@@ -15,8 +15,6 @@ export const ListFlights = () => {
   const flights: FlightsWithAirplane[] = context?.flights?.data ?? [];
   const isLoading = context?.isLoading ?? false;
 
-  console.log(flights);
-
   return (
     <div className="py-12 space-y-4 bg-slate-950">
       <div className="w-[80%] mx-auto">

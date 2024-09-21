@@ -13,7 +13,6 @@ export default async function MyTickets() {
   }
 
   const data = await getMyTickets(user.id);
-  console.log(data)
 
   return (
     <main>

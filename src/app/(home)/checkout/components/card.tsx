@@ -14,7 +14,6 @@ export interface FlightCardProps {
 
 export default function CardCheckout({ user }: FlightCardProps) {
   const data = useCheckoutData().data;
-  console.log(user?.id)
 
   if (!data) {
     return (

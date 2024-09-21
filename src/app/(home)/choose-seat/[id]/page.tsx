@@ -23,7 +23,6 @@ interface FlightsDetailProps {
 export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
   const { user, session } = await getUser()
   const flight = await getFlightById(params.id);
-  console.log(flight)
 
   return (
     <div className="bg-[#0a0920] min-h-screen py-12 mt:py-0 flex flex-col justify-center">

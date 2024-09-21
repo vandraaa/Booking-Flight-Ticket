@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import FormSignIn from "./components/form-signin";
 
 export const metadata: Metadata = {
-  title: "Sign In - Andra Airlines",
+  title: "Sign In - FlyVin",
 };
 
 export default function SignInPage() {
