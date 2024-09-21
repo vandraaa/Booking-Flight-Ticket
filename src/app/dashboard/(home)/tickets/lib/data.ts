@@ -12,8 +12,10 @@ export const getTickets = async () => {
             }
         })
 
-        return data
+        return data 
     } catch (error) {
         console.log(error)
+
+        return []
     }
 }
