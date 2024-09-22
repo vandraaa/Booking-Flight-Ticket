@@ -52,8 +52,9 @@ const useTransaction = ({user}: Props) => {
         try {
             setIsLoading(true)
             const transaction = await transactionMutate.mutateAsync(bodyData);
+            console.log(transaction)
 
-            window.snap.pay(transaction.tokenMidtrans, {
+            window.snap.pay(transaction.midtrans.token, {
                 onSuccess: function(result: unknown){
                   console.log(result)
                   router.push('/success-checkout')
