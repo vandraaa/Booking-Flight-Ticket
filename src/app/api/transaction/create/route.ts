@@ -2,9 +2,9 @@
 
 import { getUser } from "@/lib/auth";
 import { NextRequest } from "next/server";
+import prisma from "../../../../../lib/prisma";
 
 const MIDTRANS_URL = process.env.NEXT_PUBLIC_TRANSACTION_URL ?? "";
-const MIDTRANS_AUTH_KEY = process.env.NEXT_PUBLIC_MIDTRANS_AUTH_KEY ?? "";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         status: "PENDING",
         flightId: body.flightId,
         seatId: body.seatId,
-        customerId: cust.user?.id,
+        customerId: cust.user?.id ?? "",
         code: `TRX-${new Date().getTime()}-${Math.floor(
           Math.random() * 1000
         ).toString()}`,
