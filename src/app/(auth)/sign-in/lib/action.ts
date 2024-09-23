@@ -6,6 +6,7 @@ import prisma from "../../../../../lib/prisma";
 import { lucia } from "@/lib/auth";
 import { cookies } from "next/headers";
 import bcrypt from "bcrypt";
+import { redirect } from "next/navigation";
 
 export async function SignInUser(prevState: unknown, formData: FormData): Promise<ActionResult> {
     const signInSchema = userSchema.pick({

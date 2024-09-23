@@ -28,7 +28,7 @@ export default function DetailTicket({ data }: DetailTicketProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 space-y-24 lg:space-y-0">
           <main className="flex flex-col items-center w-4/5 md:w-auto px-8 md:px-12 py-8 mx-auto bg-white p-2 rounded-2xl">
             <h1 className="text-slate-900 font-bold mb-2 text-lg md:text-xl">
-              {data.flight.departureCity} {data.flight.destinationCity}
+              {data.flight.departureCity} to {data.flight.destinationCity}
             </h1>
             <div className="mt-3 flex w-full justify-center gap-x-12">
               <div className="text-center">

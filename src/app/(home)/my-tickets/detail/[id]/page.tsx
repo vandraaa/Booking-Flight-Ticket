@@ -4,6 +4,7 @@ import { getUser } from "@/lib/auth";
 import DetailTicket from "./components/detail-ticket";
 import { getTicketById } from "../lib/data";
 import Link from "next/link";
+import { getFormattedDate } from "@/lib/utils";
 
 type Params = {
   id: string
@@ -32,7 +33,7 @@ export default async function DetailTicketPage({ params }: DetailTicketProps) {
                 <h1 className="text-xs sm:text-2xl lg:text-3xl font-bold">/</h1>
                 <div className="flex flex-col">
                     <h1 className="text-xs sm:text-2xl lg:text-3xl font-bold">Jakarta to New York</h1>
-                    <h1 className="text-[9px] sm:text-sm lg:text-base font-semibold">19 September 2024</h1>
+                    <h1 className="text-[9px] sm:text-sm lg:text-base font-semibold">{data && getFormattedDate(data?.flight.departureDate)}</h1>
                 </div>
               </div>
             </div>
